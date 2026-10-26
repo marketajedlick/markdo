@@ -40,11 +40,11 @@ async function postJson(url: string, data: object): Promise<void> {
   await checkReply(res);
 }
 
-// Sent as multipart form data, which is a "simple" CORS request: no preflight round trip.
+// URL-encoded is a "simple" CORS request: no preflight round trip. (Not multipart: Web3Forms
+// mis-decodes non-ASCII field names there, e.g. "Jméno" arrived as "JmÃ©no".)
 // keepalive lets the browser finish the request even if the visitor leaves the page right away.
 async function postForm(url: string, data: Record<string, string>): Promise<void> {
-  const body = new FormData();
-  for (const [key, value] of Object.entries(data)) body.append(key, value);
+  const body = new URLSearchParams(data);
   const res = await fetch(url, { method: 'POST', headers: { Accept: 'application/json' }, body, keepalive: true });
   await checkReply(res);
 }
