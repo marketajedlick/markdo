@@ -99,6 +99,14 @@ const bars = [30, 48, 22, 58, 40];
     height: auto;
   }
 
+  /* Side by side on wide screens: grow 10 % to the left, into the gap next to the heading, without narrowing the text column. */
+  @media (min-width: 1200px) {
+    svg {
+      width: 110%;
+      margin-left: -10%;
+    }
+  }
+
   .doc,
   .panel {
     fill: var(--surface);
