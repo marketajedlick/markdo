@@ -4,7 +4,7 @@ import { formConfig, NETLIFY_FORM_NAME } from '../lib/lead-form';
 
 const sizes = ['1–10', '11–50', '51–250', '250+'];
 const isNetlify = formConfig.provider === 'netlify';
-// Without JS the form still posts straight to the endpoint (Formspree / custom).
+// Without JS the form still posts straight to the endpoint (Web3Forms / FormSubmit / Formspree / custom).
 const action = formConfig.provider && !isNetlify ? formConfig.endpoint : undefined;
 ---
 
@@ -16,6 +16,7 @@ const action = formConfig.provider && !isNetlify ? formConfig.endpoint : undefin
   action={action}
   data-netlify={isNetlify ? 'true' : undefined}
 >
+  {formConfig.provider === 'web3forms' && <input type="hidden" name="access_key" value={formConfig.key} />}
   <div class="row">
     <div class="field">
       <label for="f-name">Jméno</label>
