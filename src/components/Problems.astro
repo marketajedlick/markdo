@@ -41,8 +41,15 @@ const problems = [
     max-width: 720px;
   }
 
+  /* One column or three, never 2 + 1 (that leaves an empty cell in the hairline grid). */
   .grid {
-    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 960px) {
+    .grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
   }
 
   .item {
