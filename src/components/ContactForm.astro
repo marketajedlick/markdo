@@ -49,7 +49,7 @@ const action = formConfig.provider && !isNetlify ? formConfig.endpoint : undefin
       placeholder="Např. ruční zpracování faktur, odpovídání na stejné dotazy zákazníků…"></textarea>
     <p class="error" id="f-message-error" hidden></p>
   </div>
-  <!-- Spam trap: invisible to people, bots tend to fill it. FormSubmit also drops posts where it is set. -->
+  <!-- Spam trap: invisible to people, bots tend to fill it. Filled in = nothing is sent. -->
   <div class="visually-hidden" aria-hidden="true">
     <label for="f-honey">Nevyplňujte</label>
     <input id="f-honey" type="text" name="_honey" tabindex="-1" autocomplete="off" />
