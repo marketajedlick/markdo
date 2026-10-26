@@ -2,12 +2,15 @@
 import SectionHeading from './SectionHeading.astro';
 import TeamCard from './TeamCard.astro';
 
+// Counted at build time, so the number stays current with each deploy.
+const aiYears = new Date().getFullYear() - 2014;
+
 // Photos live in /public/team/ at 320×400 (2× the 160×200 slot).
 const members = [
   {
     name: 'Markéta Jedličková',
     role: 'Data & AI inženýrka',
-    bio: 'Vystudovala umělou inteligenci a věnuje se jí od roku 2012. Navrhuje a staví datová a AI řešení, od datových pipeline po nasazení modelů do provozu. Zajímá ji hlavně, co se stane po demu: jak model obstojí s reálnými daty a reálnými lidmi.',
+    bio: `Vystudovala umělou inteligenci a věnuje se jí ${aiYears} let. Navrhuje a staví datová a AI řešení, od datových pipeline po nasazení modelů do provozu. Zajímá ji hlavně, co se stane po demu: jak model obstojí s reálnými daty a reálnými lidmi.`,
     photo: 'team/marketa.jpg',
     photoAlt: 'Markéta Jedličková',
   },
