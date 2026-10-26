@@ -56,7 +56,14 @@ const caseStudy = {
   .grid {
     flex: 1 1 520px;
     min-width: 0;
-    grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+    /* One column or 2 × 2, never 3 + 1. */
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 560px) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 
   .cell {
