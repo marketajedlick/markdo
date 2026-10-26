@@ -1,0 +1,188 @@
+---
+// Scattered documents flow through an AI node into a tidy overview. Purely illustrative.
+const docs = [
+  { x: 28, y: 64, rotate: -8, highlight: false },
+  { x: 58, y: 148, rotate: 6, highlight: true },
+  { x: 24, y: 236, rotate: -3, highlight: false },
+];
+const rowWidths = [88, 72, 88, 56];
+const rows = [156, 182, 208, 234];
+const bars = [30, 48, 22, 58, 40];
+---
+
+<div class="illustration">
+  <svg viewBox="12 52 508 344" role="img" aria-label="Ilustrace: dokumenty projdou AI a vznikne z nich přehled">
+    <!-- Paths from the documents into the AI node, and out to the overview -->
+    <path id="in-1" class="wire" d="M150 136 C 200 136, 196 210, 232 214" />
+    <path id="in-2" class="wire" d="M182 222 C 205 222, 212 220, 232 220" />
+    <path id="in-3" class="wire" d="M148 312 C 200 312, 198 232, 232 226" />
+    <path id="out" class="wire-out" d="M308 220 L 340 220" />
+
+    {
+      docs.map((doc) => (
+        <g transform={`translate(${doc.x} ${doc.y}) rotate(${doc.rotate} 60 75)`}>
+          <rect class="doc" width="120" height="150" rx="10" />
+          <rect class="ink" x="16" y="20" width="56" height="7" rx="3.5" />
+          {rowWidths.map((w, i) => (
+            <rect
+              class:list={['line', { mark: doc.highlight && i === 1 }]}
+              x="16"
+              y={44 + i * 15}
+              width={w}
+              height="5"
+              rx="2.5"
+            />
+          ))}
+          <rect class="ink" x="16" y="118" width="40" height="8" rx="4" />
+          <rect class="line" x="76" y="118" width="28" height="8" rx="4" />
+        </g>
+      ))
+    }
+
+    <!-- AI node, same mark as the logo -->
+    <circle class="halo" cx="270" cy="220" r="58" />
+    <rect class="node" x="234" y="184" width="72" height="72" rx="16" />
+    <rect class="node-core" x="257" y="207" width="26" height="26" rx="6" />
+
+    <!-- Tidy overview -->
+    <rect class="panel" x="340" y="104" width="160" height="232" rx="14" />
+    <rect class="accent" x="358" y="126" width="10" height="10" rx="2.5" />
+    <rect class="ink" x="376" y="128" width="64" height="6" rx="3" />
+    {
+      rows.map((y) => (
+        <g>
+          <rect class="check" x="358" y={y} width="8" height="8" rx="2" />
+          <rect class="line" x="374" y={y + 1.5} width="64" height="5" rx="2.5" />
+          <rect class="ink-soft" x="456" y={y + 1.5} width="26" height="5" rx="2.5" />
+          <line class="sep" x1="358" x2="482" y1={y + 17} y2={y + 17} />
+        </g>
+      ))
+    }
+    {
+      bars.map((h, i) => (
+        <rect class:list={['bar', { 'bar-accent': i === 3 }]} x={360 + i * 25} y={316 - h} width="14" height={h} rx="3" />
+      ))
+    }
+    <circle class="accent" cx="496" cy="108" r="16" />
+    <path class="tick" d="M488 108 l5 5 l10 -10" />
+
+    <!-- Moving dots (hidden when the user prefers reduced motion). Negative begin = already
+         mid-path on load, so no dot sits at the SVG origin before its animation starts. -->
+    <g class="pulses">
+      {
+        ['in-1', 'in-2', 'in-3'].map((id, i) => (
+          <circle class="pulse" r="4">
+            <animateMotion dur="2.4s" begin={`-${i * 0.8}s`} repeatCount="indefinite">
+              <mpath href={`#${id}`} />
+            </animateMotion>
+          </circle>
+        ))
+      }
+      <circle class="pulse" r="4">
+        <animateMotion dur="1.2s" begin="-0.4s" repeatCount="indefinite">
+          <mpath href="#out" />
+        </animateMotion>
+      </circle>
+    </g>
+  </svg>
+</div>
+
+<style>
+  .illustration {
+    flex: 1 1 380px;
+    min-width: 0;
+  }
+
+  svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .doc,
+  .panel {
+    fill: var(--surface);
+    stroke: var(--border);
+    stroke-width: 1.5;
+  }
+
+  .ink {
+    fill: var(--text-subtle);
+  }
+
+  .ink-soft {
+    fill: var(--border-strong);
+  }
+
+  .line {
+    fill: var(--line);
+  }
+
+  .line.mark {
+    fill: var(--accent);
+  }
+
+  .wire {
+    fill: none;
+    stroke: var(--border-strong);
+    stroke-width: 1.5;
+    stroke-dasharray: 3 5;
+  }
+
+  .wire-out {
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 2;
+  }
+
+  .halo {
+    fill: none;
+    stroke: var(--accent);
+    stroke-opacity: 0.25;
+    stroke-dasharray: 2 6;
+  }
+
+  .node {
+    fill: var(--white);
+    stroke: var(--accent);
+    stroke-width: 2;
+  }
+
+  .node-core,
+  .accent,
+  .bar-accent,
+  .pulse {
+    fill: var(--accent);
+  }
+
+  .check {
+    fill: var(--accent);
+    opacity: 0.85;
+  }
+
+  .sep {
+    stroke: var(--line);
+  }
+
+  .bar {
+    fill: var(--border);
+  }
+
+  .bar.bar-accent {
+    fill: var(--accent);
+  }
+
+  .tick {
+    fill: none;
+    stroke: var(--white);
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pulses {
+      display: none;
+    }
+  }
+</style>
