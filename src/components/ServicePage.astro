@@ -74,7 +74,7 @@ const others = services.filter((s) => s.slug !== service.slug);
 
     <section class="section alt" aria-labelledby="vystupy">
       <div class="container stack inner">
-        <SectionHeading id="vystupy" eyebrow="Co si odnesete" title="Výsledek, ne prezentace" />
+        <SectionHeading id="vystupy" eyebrow="Výstupy" title={service.outcomesTitle ?? 'Co získáte'} />
         <div class="outcomes">
           {
             service.outcomes.map((o) => (
@@ -99,7 +99,7 @@ const others = services.filter((s) => s.slug !== service.slug);
 
     <section class="section" aria-labelledby="faq">
       <div class="container stack inner">
-        <SectionHeading id="faq" eyebrow="Časté otázky" title="Na co se nás ptáte" />
+        <SectionHeading id="faq" eyebrow="Časté otázky" title="Co vás může zajímat" />
         <div class="faq">
           {
             service.faq.map((item) => (
