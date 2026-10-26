@@ -37,6 +37,19 @@ async function postJson(url: string, data: object): Promise<void> {
     headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
     body: JSON.stringify(data),
   });
+  await checkReply(res);
+}
+
+// Sent as multipart form data, which is a "simple" CORS request: no preflight round trip.
+// keepalive lets the browser finish the request even if the visitor leaves the page right away.
+async function postForm(url: string, data: Record<string, string>): Promise<void> {
+  const body = new FormData();
+  for (const [key, value] of Object.entries(data)) body.append(key, value);
+  const res = await fetch(url, { method: 'POST', headers: { Accept: 'application/json' }, body, keepalive: true });
+  await checkReply(res);
+}
+
+async function checkReply(res: Response): Promise<void> {
   if (!res.ok) throw new Error(`Form endpoint responded ${res.status}`);
   // FormSubmit answers 200 with {"success": "false"} e.g. before the address is activated;
   // Web3Forms reports errors as {"success": false}.
@@ -60,7 +73,7 @@ const subject = (lead: Lead) => `Nová poptávka z markdo.cz: ${lead.name}`;
 const adapters: Record<FormProvider, (lead: Lead) => Promise<void>> = {
   web3forms: (lead) => {
     if (!formConfig.key) throw new Error('PUBLIC_FORM_KEY is not set');
-    return postJson(formConfig.endpoint || WEB3FORMS_ENDPOINT, {
+    return postForm(formConfig.endpoint || WEB3FORMS_ENDPOINT, {
       access_key: formConfig.key,
       subject: subject(lead),
       from_name: 'Web markdo.cz',
