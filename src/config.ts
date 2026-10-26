@@ -4,7 +4,7 @@ export const site = {
   title: 'MarkDo – AI pro firmy',
   description:
     'Zavedeme AI do firmy tak, aby opravdu šetřila čas. Najdeme procesy, které vás zdržují, navrhneme řešení na míru a naučíme tým s ním pracovat.',
-  ogImage: 'og-placeholder.png',
+  ogImage: 'og.png',
   email: 'info@markdo.cz',
   emailHref: 'mailto:info@markdo.cz',
   linkedin: [

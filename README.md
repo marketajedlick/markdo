@@ -24,3 +24,9 @@ npm run preview
 
 Push do `master` spustí `.github/workflows/deploy.yml`, který stránku sestaví a nasadí na GitHub Pages.
 Pull requesty se jen sestaví. Jednorázově je potřeba v GitHubu nastavit **Settings → Pages → Source: GitHub Actions**.
+
+## Obrázek pro sdílení
+
+`public/og.png` (1200×630) se ukazuje při sdílení odkazu (LinkedIn, zprávy). Vzniká z komponenty
+`src/components/OgCard.astro`: dočasně ji vložte do stránky, sestavte web a stránku vyfoťte v prohlížeči
+v rozměru 1200×630 (např. Playwright `element.screenshot`).

@@ -1,0 +1,37 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const home = import.meta.env.BASE_URL;
+---
+
+<Base title="Stránka nenalezena – MarkDo">
+  <Header home={home} />
+  <main class="grid-bg">
+    <div class="container stack inner">
+      <p class="eyebrow">Chyba 404</p>
+      <h1 class="h2">Tahle stránka neexistuje.</h1>
+      <p class="muted">Možná je v adrese překlep, nebo stránka zmizela.</p>
+      <div class="actions">
+        <a href={home} class="btn btn-primary">Zpět na úvod</a>
+        <a href={`${home}#kontakt`} class="btn btn-ghost">Napsat nám</a>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  .inner {
+    padding-block: clamp(80px, 14vw, 180px);
+    gap: 20px;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 8px;
+  }
+</style>
