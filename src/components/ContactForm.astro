@@ -23,7 +23,7 @@ const action = formConfig.provider && !isNetlify ? formConfig.endpoint : undefin
       <p class="error" id="f-name-error" hidden></p>
     </div>
     <div class="field">
-      <label for="f-company">Firma</label>
+      <label for="f-company">Firma <span class="optional">(nepovinné)</span></label>
       <input id="f-company" class="input" type="text" name="company" autocomplete="organization" />
     </div>
     <div class="field">
@@ -49,8 +49,11 @@ const action = formConfig.provider && !isNetlify ? formConfig.endpoint : undefin
       placeholder="Např. ruční zpracování faktur, odpovídání na stejné dotazy zákazníků…"></textarea>
     <p class="error" id="f-message-error" hidden></p>
   </div>
-  <!-- Spam trap: hidden from people, bots fill it in. "_honey" is FormSubmit's name for it (used when posting without JS). -->
-  <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none" />
+  <!-- Spam trap: invisible to people, bots tend to fill it. Filled in = nothing is sent. -->
+  <div class="visually-hidden" aria-hidden="true">
+    <label for="f-honey">Nevyplňujte</label>
+    <input id="f-honey" type="text" name="_honey" tabindex="-1" autocomplete="off" />
+  </div>
   <button type="submit" class="btn btn-primary submit">Odeslat a domluvit konzultaci</button>
   <p class="status" role="status" aria-live="polite" hidden></p>
   <p class="consent">
@@ -67,6 +70,9 @@ const action = formConfig.provider && !isNetlify ? formConfig.endpoint : undefin
   import { submitLead, type Lead } from '../lib/lead-form';
 
   const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  // Nobody fills in the form this fast; bots do.
+  const MIN_FILL_MS = 3000;
+  const loadedAt = Date.now();
 
   // Returns the Czech error message for a field, or '' when it is valid.
   const validators: Record<string, (value: string) => string> = {
@@ -124,8 +130,8 @@ const action = formConfig.provider && !isNetlify ? formConfig.endpoint : undefin
       return;
     }
 
-    // A filled spam trap means a bot: look successful, send nothing.
-    if (fieldValue('_honey')) {
+    // Spam bot: filled the hidden field or submitted right after load. Look successful, send nothing.
+    if (fieldValue('_honey') || Date.now() - loadedAt < MIN_FILL_MS) {
       form.reset();
       showStatus('success');
       return;
@@ -230,6 +236,10 @@ const action = formConfig.provider && !isNetlify ? formConfig.endpoint : undefin
   .status[data-kind='failure'] {
     border-color: var(--danger);
     color: var(--danger);
+  }
+
+  .optional {
+    color: var(--text-subtle);
   }
 
   .consent {

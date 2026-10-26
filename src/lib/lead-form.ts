@@ -1,4 +1,4 @@
-// Form backend adapter. Pick a provider with PUBLIC_FORM_PROVIDER (+ PUBLIC_FORM_ENDPOINT),
+// Form backend adapter. Pick a provider with PUBLIC_FORM_PROVIDER (+ PUBLIC_FORM_ENDPOINT / PUBLIC_FORM_KEY),
 // see .env.example. Swapping backends never touches the form markup or validation.
 
 export interface Lead {
@@ -9,28 +9,73 @@ export interface Lead {
   message: string;
 }
 
-export type FormProvider = 'formspree' | 'netlify' | 'custom';
+export type FormProvider = 'web3forms' | 'formsubmit' | 'formspree' | 'netlify' | 'custom';
+
+/** Service name as shown on the privacy page. */
+export const FORM_PROVIDER_NAMES: Record<FormProvider, string> = {
+  web3forms: 'Web3Forms',
+  formsubmit: 'FormSubmit',
+  formspree: 'Formspree',
+  netlify: 'Netlify',
+  custom: 'vlastní server',
+};
 
 export const NETLIFY_FORM_NAME = 'kontakt';
 
 export const formConfig = {
   provider: (import.meta.env.PUBLIC_FORM_PROVIDER || undefined) as FormProvider | undefined,
   endpoint: import.meta.env.PUBLIC_FORM_ENDPOINT as string | undefined,
+  // Web3Forms access key. Public by design: it only allows sending to the inbox it was issued for.
+  key: import.meta.env.PUBLIC_FORM_KEY as string | undefined,
 };
 
-async function postJson(url: string, lead: Lead): Promise<void> {
+const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit';
+
+async function postJson(url: string, data: object): Promise<void> {
   const res = await fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-    body: JSON.stringify(lead),
+    body: JSON.stringify(data),
   });
   if (!res.ok) throw new Error(`Form endpoint responded ${res.status}`);
-  // FormSubmit answers 200 with {"success": "false"} e.g. before the address is activated.
-  const data = await res.json().catch(() => null);
-  if (data && String(data.success) === 'false') throw new Error(`Form endpoint refused: ${data.message ?? ''}`);
+  // FormSubmit answers 200 with {"success": "false"} e.g. before the address is activated;
+  // Web3Forms reports errors as {"success": false}.
+  const reply = await res.json().catch(() => null);
+  if (reply && String(reply.success) === 'false') throw new Error(`Form endpoint refused: ${reply.message ?? ''}`);
 }
 
+// Both e-mail services use the keys as labels, so they are in Czech.
+function czechFields(lead: Lead) {
+  return {
+    Jméno: lead.name,
+    Firma: lead.company || '–',
+    'E-mail': lead.email,
+    'Počet zaměstnanců': lead.size,
+    Zpráva: lead.message,
+  };
+}
+
+const subject = (lead: Lead) => `Nová poptávka z markdo.cz: ${lead.name}`;
+
 const adapters: Record<FormProvider, (lead: Lead) => Promise<void>> = {
+  web3forms: (lead) => {
+    if (!formConfig.key) throw new Error('PUBLIC_FORM_KEY is not set');
+    return postJson(formConfig.endpoint || WEB3FORMS_ENDPOINT, {
+      access_key: formConfig.key,
+      subject: subject(lead),
+      from_name: 'Web markdo.cz',
+      replyto: lead.email,
+      ...czechFields(lead),
+    });
+  },
+  // _replyto makes "Reply" go to the visitor.
+  formsubmit: (lead) =>
+    postJson(requireEndpoint(), {
+      ...czechFields(lead),
+      _subject: subject(lead),
+      _replyto: lead.email,
+      _template: 'table',
+    }),
   formspree: (lead) => postJson(requireEndpoint(), lead),
   custom: (lead) => postJson(requireEndpoint(), lead),
   // Netlify Forms only works when the site is hosted on Netlify.

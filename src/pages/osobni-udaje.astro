@@ -3,6 +3,9 @@ import Base from '../layouts/Base.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { site } from '../config';
+import { formConfig, FORM_PROVIDER_NAMES } from '../lib/lead-form';
+
+const formService = formConfig.provider ? FORM_PROVIDER_NAMES[formConfig.provider] : 'služba pro odesílání formuláře';
 
 const home = import.meta.env.BASE_URL;
 ---
@@ -40,7 +43,7 @@ const home = import.meta.env.BASE_URL;
 
       <h2 class="h3">Kdo k nim má přístup</h2>
       <p>
-        Údaje vidíme jen my dva. Technicky nám pomáhají zpracovatelé: GitHub (hosting webu), FormSubmit
+        Údaje vidíme jen my dva. Technicky nám pomáhají zpracovatelé: GitHub (hosting webu), {formService}
         (odesílání formuláře) a Váš-hosting (e-mailová schránka). Někteří z nich mohou údaje zpracovávat i v USA, a to na
         základě rozhodnutí Evropské komise o odpovídající ochraně (EU–US Data Privacy Framework) nebo
         standardních smluvních doložek.
