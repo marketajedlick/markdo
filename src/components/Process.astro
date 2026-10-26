@@ -112,4 +112,12 @@ const steps = [
     min-width: 0;
     font-size: 16px;
   }
+
+  /* Mobile: short standalone blocks centred (long text stays left-aligned). */
+  @media (max-width: 640px) {
+    .intro {
+      justify-content: center;
+      text-align: center;
+    }
+  }
 </style>

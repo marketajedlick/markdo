@@ -72,4 +72,16 @@ const { name, role, bio, photo, photoAlt } = Astro.props;
     font-size: 15px;
     color: var(--accent);
   }
+
+  /* Mobile: short standalone blocks centred (long text stays left-aligned). */
+  @media (max-width: 640px) {
+    .member {
+      justify-content: center;
+    }
+
+    .name,
+    .role {
+      text-align: center;
+    }
+  }
 </style>
