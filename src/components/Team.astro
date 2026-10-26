@@ -24,7 +24,7 @@ const members = [
 ];
 ---
 
-<section id="tym" class="section" aria-labelledby="tym-title">
+<section id="tym" class="section team" aria-labelledby="tym-title">
   <div class="container stack inner">
     <SectionHeading id="tym-title" eyebrow="Kdo jsme" title="Inženýrka a designér">
       <p class="mono name-origin">
@@ -40,6 +40,14 @@ const members = [
 </section>
 
 <style>
+  .team {
+    background: var(--bg-alt);
+  }
+
+  .team :global(.member) {
+    background: var(--surface);
+  }
+
   .inner {
     gap: 48px;
   }
