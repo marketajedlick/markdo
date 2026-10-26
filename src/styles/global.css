@@ -26,6 +26,9 @@
   --radius-md: 10px;
   --radius-lg: 14px;
   --radius-xl: 16px;
+
+  /* Sticky header (Header.astro): 44 px button + 2 × 12 px padding + border. */
+  --header-h: 69px;
 }
 
 *,
@@ -36,6 +39,8 @@
 
 html {
   scroll-behavior: smooth;
+  /* Anchors and focused fields land below the sticky header. */
+  scroll-padding-top: var(--header-h);
 }
 
 @media (prefers-reduced-motion: reduce) {

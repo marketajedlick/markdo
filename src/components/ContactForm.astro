@@ -33,8 +33,9 @@ const action = formConfig.provider && !isNetlify ? formConfig.endpoint : undefin
       <p class="error" id="f-email-error" hidden></p>
     </div>
     <div class="field">
-      <label for="f-size">Počet zaměstnanců</label>
+      <label for="f-size">Počet zaměstnanců <span class="optional">(nepovinné)</span></label>
       <select id="f-size" class="input" name="size">
+        <option value="">Vyberte</option>
         {sizes.map((size) => <option>{size}</option>)}
       </select>
     </div>
@@ -50,12 +51,15 @@ const action = formConfig.provider && !isNetlify ? formConfig.endpoint : undefin
       placeholder="Např. ruční zpracování faktur, odpovídání na stejné dotazy zákazníků…"></textarea>
     <p class="error" id="f-message-error" hidden></p>
   </div>
-  <!-- Spam trap: invisible to people, bots tend to fill it. Filled in = nothing is sent. -->
+  <!-- Spam trap: invisible to people, bots tend to fill it. Filled in = sent anyway, marked as possible spam. -->
   <div class="visually-hidden" aria-hidden="true">
     <label for="f-honey">Nevyplňujte</label>
     <input id="f-honey" type="text" name="_honey" tabindex="-1" autocomplete="off" />
   </div>
-  <button type="submit" class="btn btn-primary submit">Odeslat a domluvit konzultaci</button>
+  <div class="send">
+    <button type="submit" class="btn btn-primary submit">Odeslat a domluvit konzultaci</button>
+    <p class="reply-time">Ozveme se vám.</p>
+  </div>
   <p class="status" role="status" aria-live="polite" hidden></p>
   <p class="consent">
     Jak nakládáme s vašimi údaji, popisujeme v <a href={site.privacyUrl}>zásadách zpracování osobních údajů</a>.
@@ -81,6 +85,9 @@ const action = formConfig.provider && !isNetlify ? formConfig.endpoint : undefin
   import { submitLead, type Lead } from '../lib/lead-form';
 
   const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  // People rarely send the form this fast; bots do. (Autofill can, so it only marks the lead.)
+  const MIN_FILL_MS = 3000;
+  const loadedAt = Date.now();
 
   // Returns the Czech error message for a field, or '' when it is valid.
   const validators: Record<string, (value: string) => string> = {
@@ -95,7 +102,6 @@ const action = formConfig.provider && !isNetlify ? formConfig.endpoint : undefin
   const messages = document.querySelector<HTMLTemplateElement>('#lead-form-messages')!.content;
   const message = (key: string) => messages.querySelector(`[data-key="${key}"]`)!.textContent!.trim();
   let attempted = false;
-  let sending = false;
 
   form.noValidate = true;
 
@@ -117,7 +123,8 @@ const action = formConfig.provider && !isNetlify ? formConfig.endpoint : undefin
 
   const thanks = document.querySelector<HTMLDialogElement>('#lead-thanks')!;
   const submit = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
-  const submitLabel = submit.textContent!;
+  const submitLabel = submit.textContent;
+  let sending = false;
 
   function showStatus(kind: 'success' | 'failure') {
     if (kind === 'success') {
@@ -125,7 +132,6 @@ const action = formConfig.provider && !isNetlify ? formConfig.endpoint : undefin
       return;
     }
     // Failure stays inline, next to the visitor's text.
-    if (thanks.open) thanks.close();
     status.textContent = message(kind);
     status.dataset.kind = kind;
     status.hidden = false;
@@ -155,24 +161,21 @@ const action = formConfig.provider && !isNetlify ? formConfig.endpoint : undefin
       return;
     }
 
-    // Spam bot: filled the hidden field. Look successful, send nothing.
-    // (No "too fast" check: autofill + paste is fast too, and a real lead must never be dropped.)
-    if (fieldValue('_honey')) {
-      form.reset();
-      showStatus('success');
-      return;
-    }
-
     const lead: Lead = {
       name: fieldValue('name'),
       company: fieldValue('company'),
       email: fieldValue('email'),
       size: fieldValue('size'),
       message: fieldValue('message'),
+      // Looks like a bot: still sent (a real enquiry must never get lost), just marked in the subject.
+      suspect: Boolean(fieldValue('_honey')) || Date.now() - loadedAt < MIN_FILL_MS,
     };
 
-    // Thank the visitor only once the service has accepted the lead; on failure their text stays put.
-    setSending(true);
+    // Thank the visitor only once the message has really arrived (the services take a second or two).
+    sending = true;
+    form.setAttribute('aria-busy', 'true');
+    submit.setAttribute('aria-disabled', 'true');
+    submit.textContent = 'Odesílám…';
     try {
       await submitLead(lead);
       form.reset();
@@ -182,17 +185,12 @@ const action = formConfig.provider && !isNetlify ? formConfig.endpoint : undefin
       console.error(err);
       showStatus('failure');
     } finally {
-      setSending(false);
+      sending = false;
+      form.setAttribute('aria-busy', 'false');
+      submit.removeAttribute('aria-disabled');
+      submit.textContent = submitLabel;
     }
   });
-
-  // aria-disabled instead of disabled: the button keeps focus while the request runs.
-  function setSending(on: boolean) {
-    sending = on;
-    form.setAttribute('aria-busy', String(on));
-    submit.setAttribute('aria-disabled', String(on));
-    submit.textContent = on ? 'Odesílám…' : submitLabel;
-  }
 </script>
 
 <style>
@@ -250,11 +248,6 @@ const action = formConfig.provider && !isNetlify ? formConfig.endpoint : undefin
   .error {
     font-size: 15px;
     color: var(--danger);
-  }
-
-  .submit[aria-disabled='true'] {
-    cursor: progress;
-    opacity: 0.7;
   }
 
   .thanks {
@@ -316,6 +309,23 @@ const action = formConfig.provider && !isNetlify ? formConfig.endpoint : undefin
   .thanks .btn {
     margin-top: 12px;
     min-width: 140px;
+  }
+
+  .send {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 20px;
+  }
+
+  .submit[aria-disabled='true'] {
+    opacity: 0.7;
+    cursor: progress;
+  }
+
+  .reply-time {
+    font-size: 16px;
+    color: var(--text-muted);
   }
 
   .status {

@@ -5,11 +5,16 @@ const caseStudy = {
   title: 'Automatické zpracování faktur pro filmovou produkci',
   client: 'Faktury k mnoha projektům najednou a jedna účetní, která je dřív všechny zpracovávala ručně.',
   problem: 'Každou fakturu bylo potřeba ručně přejmenovat, očíslovat a přepsat. Přehled, kolik který projekt stojí a komu se platí, se skládal pracně.',
-  solution: 'Účetní nahraje fakturu do složky projektu. AI ji přečte, přejmenuje, očísluje a pošle do dashboardu s náklady po projektech a dodavatelích, kde se dá na každou fakturu prokliknout. Nové faktury zpracuje jedno tlačítko a souhrn se stáhne jako XLSX. Co AI nepřečte s jistotou, označí jako sporné a nechá opravit člověkem.',
-  result: 'cca 60 h / rok',
+  solution: [
+    'Účetní nahraje fakturu do složky projektu.',
+    'AI ji přečte, přejmenuje a očísluje.',
+    'Faktura se objeví v dashboardu s náklady po projektech a dodavatelích. Souhrn se stáhne jako XLSX.',
+    'Co AI nepřečte s jistotou, označí jako sporné a opraví člověk.',
+  ],
+  result: '60 h ročně',
   resultNote: 'ušetřeného času účetní',
-  build: '1 h',
-  buildNote: 'nastavení a spuštění',
+  // Speed of setup stays a sentence: next to the result as a second big number it read like "a one-hour script".
+  resultDetail: 'Nastavení a spuštění zabralo hodinu. Nové faktury zpracuje jedno tlačítko.',
 };
 ---
 
@@ -25,17 +30,17 @@ const caseStudy = {
       </div>
       <div class="stack cell">
         <span class="mono subtle label">Řešení</span>
-        <p>{caseStudy.solution}</p>
+        <ol class="solution">
+          {caseStudy.solution.map((step) => <li>{step}</li>)}
+        </ol>
       </div>
-      <div class="stack cell">
+      <div class="stack cell result-cell">
         <span class="mono subtle label">Výsledek</span>
-        <p class="result">{caseStudy.result}</p>
-        <p class="muted">{caseStudy.resultNote}</p>
-      </div>
-      <div class="stack cell">
-        <span class="mono subtle label">Realizace</span>
-        <p class="result">{caseStudy.build}</p>
-        <p class="muted">{caseStudy.buildNote}</p>
+        <p class="result">
+          <span class="result-value">{caseStudy.result}</span>
+          <span class="result-note">{caseStudy.resultNote}</span>
+        </p>
+        <p class="muted">{caseStudy.resultDetail}</p>
       </div>
     </div>
   </div>
@@ -56,7 +61,7 @@ const caseStudy = {
   .grid {
     flex: 1 1 520px;
     min-width: 0;
-    /* One column or 2 × 2, never 3 + 1. */
+    /* One column, or problem and solution side by side above the result. */
     grid-template-columns: 1fr;
   }
 
@@ -75,10 +80,41 @@ const caseStudy = {
     font-size: 15px;
   }
 
-  .result {
-    font-size: 28px;
-    font-weight: 600;
-    letter-spacing: -0.02em;
+  .solution {
+    margin: 0;
+    padding-left: 1.9em;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .solution li::marker {
+    font-family: var(--font-mono);
     color: var(--accent);
+  }
+
+  /* The result closes the story across the full width. */
+  .result-cell {
+    grid-column: 1 / -1;
+  }
+
+  .result {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 16px;
+  }
+
+  .result-value {
+    font-size: clamp(40px, 5vw, 56px);
+    line-height: 1.05;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    color: var(--accent);
+  }
+
+  .result-note {
+    font-size: 21px;
+    font-weight: 600;
   }
 </style>
