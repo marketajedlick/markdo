@@ -5,9 +5,10 @@ import { services } from '../lib/services';
 interface Props {
   /** Homepage URL to prefix the section anchors with; empty on the homepage itself. */
   home?: string;
+  contact?: string;
 }
 
-const { home = '' } = Astro.props;
+const { home = '', contact = `${home}#kontakt` } = Astro.props;
 const base = import.meta.env.BASE_URL;
 const serviceLinks = services.map((s) => ({ href: `${base}${s.slug}/`, label: s.name }));
 const process = { href: `${home}#proces`, label: 'Jak spolupráce probíhá' };
@@ -31,7 +32,7 @@ const links = [
       {links.map((link) => <a href={link.href}>{link.label}</a>)}
     </nav>
     <div class="end">
-      <a href={`${home}#kontakt`} class="btn btn-primary cta">Konzultace<span class="cta-extra">&nbsp;zdarma</span></a>
+      <a href={contact} class="btn btn-primary cta">Konzultace<span class="cta-extra">&nbsp;zdarma</span></a>
       <!-- Below 820 px the links move into this menu. -->
       <details class="mobile-menu">
         <summary aria-label="Menu">
