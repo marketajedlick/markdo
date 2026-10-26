@@ -1,4 +1,6 @@
 ---
+import SectionHeading from './SectionHeading.astro';
+
 const problems = [
   {
     title: 'Data se přepisují ručně',
@@ -16,57 +18,63 @@ const problems = [
 ---
 
 <section class="section problems" aria-labelledby="problemy-title">
-  <div class="container stack inner">
-    <h2 id="problemy-title" class="h2 title">Znáte to?</h2>
-    <div class="hairline-grid grid">
+  <div class="container inner">
+    <SectionHeading id="problemy-title" eyebrow="S čím za námi firmy chodí" title="Znáte to?" />
+    <ul class="list">
       {
         problems.map((problem) => (
-          <article class="stack item">
+          <li class="item">
             <h3 class="h3">{problem.title}</h3>
             <p class="muted">{problem.text}</p>
-          </article>
+          </li>
         ))
       }
-    </div>
+    </ul>
   </div>
 </section>
 
 <style>
-  /* Tinted band so the section reads apart from the hero; numbering is left to the process below. */
+  /* Tinted band so the section reads apart from the hero. Open rows instead of cards,
+     so it does not repeat the card grid of "Proč my" further down. */
   .problems {
     background: var(--bg-alt);
   }
 
   .inner {
-    gap: 40px;
+    display: grid;
+    gap: 32px;
   }
 
-  .title {
-    max-width: 720px;
-  }
-
-  /* One column or three, never 2 + 1 (that leaves an empty cell in the hairline grid). */
-  .grid {
-    grid-template-columns: 1fr;
-  }
-
-  @media (min-width: 960px) {
-    .grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
+  .list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-bottom: 1px solid var(--border);
   }
 
   .item {
-    padding: 32px;
-    gap: 12px;
-    background: var(--surface);
+    display: grid;
+    gap: 8px;
+    padding-block: 24px;
+    border-top: 1px solid var(--border);
   }
 
-  /* Mobile: short standalone blocks centred (long text stays left-aligned). */
-  @media (max-width: 640px) {
-    .title {
-      text-align: center;
-      align-self: center;
+  @media (min-width: 960px) {
+    .inner {
+      grid-template-columns: 1fr 2fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .item {
+      grid-template-columns: 1fr 1.25fr;
+      gap: 32px;
+      padding-block: 28px;
+    }
+
+    .item .h3 {
+      font-size: 22px;
+      line-height: 1.3;
     }
   }
 </style>
