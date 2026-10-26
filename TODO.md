@@ -1,7 +1,6 @@
 # TODO – MarkDo web
 
 ## Placeholdery v textu (`[takhle]`)
-- [ ] Případovka Toasters Picture: výsledek je odhad (~15 h / měsíc) – nahradit skutečným číslem, ověřit název firmy a souhlas klienta se zveřejněním – `src/components/CaseStudy.astro`
 - [ ] Zásady osobních údajů (`src/pages/osobni-udaje.astro`): doplnit správce (jméno/firma, IČO, adresa) a dobu uchování `[12 měsíců]`. Ideálně nechat zkontrolovat.
 - [ ] OG obrázek – zatím `public/og-placeholder.png` (1200×630, jen logo), nahradit finálním
 
