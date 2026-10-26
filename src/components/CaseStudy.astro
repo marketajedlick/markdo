@@ -13,6 +13,12 @@ const caseStudy = {
   ],
   result: '60 h ročně',
   resultNote: 'ušetřeného času účetní',
+  // Before/after of the manual work, so the headline number has something to stand on.
+  comparison: {
+    label: 'Ruční přejmenování, číslování a přepisování faktur',
+    before: 'cca 60 h ročně',
+    after: '0 h',
+  },
   // Speed of setup stays a sentence: next to the result as a second big number it read like "a one-hour script".
   resultDetail: 'Nastavení a spuštění zabralo hodinu. Nové faktury zpracuje jedno tlačítko.',
 };
@@ -40,6 +46,17 @@ const caseStudy = {
           <span class="result-value">{caseStudy.result}</span>
           <span class="result-note">{caseStudy.resultNote}</span>
         </p>
+        <p class="muted comparison-label" id="cs-comparison">{caseStudy.comparison.label}</p>
+        <dl class="comparison" aria-labelledby="cs-comparison">
+          <div>
+            <dt class="mono subtle">Dřív</dt>
+            <dd>{caseStudy.comparison.before}</dd>
+          </div>
+          <div>
+            <dt class="mono subtle">Teď</dt>
+            <dd>{caseStudy.comparison.after}</dd>
+          </div>
+        </dl>
         <p class="muted">{caseStudy.resultDetail}</p>
       </div>
     </div>
@@ -114,6 +131,34 @@ const caseStudy = {
   }
 
   .result-note {
+    font-size: 21px;
+    font-weight: 600;
+  }
+
+  .comparison-label {
+    margin-top: 8px;
+  }
+
+  .comparison {
+    margin: 0 0 4px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 32px;
+  }
+
+  .comparison div {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+
+  .comparison dt {
+    font-size: 15px;
+  }
+
+  .comparison dd {
+    margin: 0;
     font-size: 21px;
     font-weight: 600;
   }
