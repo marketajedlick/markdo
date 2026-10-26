@@ -1,7 +1,7 @@
 # TODO – MarkDo web
 
 ## Placeholdery v textu (`[takhle]`)
-- [ ] Zásady osobních údajů (`src/pages/osobni-udaje.astro`): doplnit správce (jméno/firma, IČO, adresa) a dobu uchování `[12 měsíců]`. Ideálně nechat zkontrolovat.
+- [ ] Zásady osobních údajů (`src/pages/osobni-udaje.astro`): hotové, ideálně nechat jednou zkontrolovat.
 - [ ] OG obrázek – zatím `public/og-placeholder.png` (1200×630, jen logo), nahradit finálním
 
 ## Otevřená rozhodnutí
