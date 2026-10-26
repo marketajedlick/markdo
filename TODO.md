@@ -4,7 +4,7 @@
 - [ ] Hero vizuál: `[X h týdně]`, `[Y min]` – `src/components/FlowVisual.astro`
 - [ ] Firemní program: `[X týdnů]` – `src/components/Process.astro`
 - [ ] Případovka: typ firmy, věta o klientovi, problém, řešení, výsledek `[X h / měsíc]` – `src/components/CaseStudy.astro`
-- [ ] Bio Doda, doplnění bia Markéty – `src/components/Team.astro`
+- [ ] Doplnění bia Markéty – `src/components/Team.astro`
 - [ ] Lhůta odpovědi `[do X pracovních dnů]`, e-mail, LinkedIn, odkaz na GDPR – `src/config.ts`
 - [ ] OG obrázek – zatím `public/og-placeholder.png` (1200×630, jen logo), nahradit finálním
 
