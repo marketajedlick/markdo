@@ -41,4 +41,12 @@ import ContactForm from './ContactForm.astro';
   .text {
     max-width: 440px;
   }
+
+  /* Mobile: short standalone blocks centred (long text stays left-aligned). */
+  @media (max-width: 640px) {
+    .intro {
+      align-items: center;
+      text-align: center;
+    }
+  }
 </style>

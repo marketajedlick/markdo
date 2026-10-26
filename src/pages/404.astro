@@ -34,4 +34,16 @@ const home = import.meta.env.BASE_URL;
     gap: 12px;
     margin-top: 8px;
   }
+
+  /* Mobile: short standalone blocks centred (long text stays left-aligned). */
+  @media (max-width: 640px) {
+    .inner {
+      align-items: center;
+      text-align: center;
+    }
+
+    .actions {
+      justify-content: center;
+    }
+  }
 </style>

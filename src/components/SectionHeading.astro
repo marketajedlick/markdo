@@ -19,4 +19,12 @@ const { id, eyebrow, title, class: className } = Astro.props;
   .heading {
     gap: 16px;
   }
+
+  /* Mobile: short standalone blocks centred (long text stays left-aligned). */
+  @media (max-width: 640px) {
+    .heading {
+      align-items: center;
+      text-align: center;
+    }
+  }
 </style>

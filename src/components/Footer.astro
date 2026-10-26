@@ -6,7 +6,7 @@ const year = new Date().getFullYear();
 
 <footer class="footer">
   <div class="container inner">
-    <span>© {year} MarkDo · Markéta Jedličková &amp; Dodo Dobrik</span>
+    <span class="copy">© {year} MarkDo · Markéta&nbsp;Jedličková &amp; Dodo&nbsp;Dobrik</span>
     <div class="links">
       <a href={site.privacyUrl}>Osobní údaje</a>
       <a href={site.emailHref}>{site.email}</a>
@@ -46,5 +46,23 @@ const year = new Date().getFullYear();
 
   .links a:hover {
     color: var(--accent);
+  }
+
+  /* Mobile: short standalone blocks centred (long text stays left-aligned). */
+  @media (max-width: 640px) {
+    .inner,
+    .links {
+      justify-content: center;
+      text-align: center;
+    }
+
+    .copy {
+      text-wrap: balance;
+    }
+
+    /* The links are 44 px tall already; no extra gap between their rows. */
+    .links {
+      row-gap: 0;
+    }
   }
 </style>
