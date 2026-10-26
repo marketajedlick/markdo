@@ -64,6 +64,18 @@ const ogImage = new URL(asset(site.ogImage), Astro.site);
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
+    {
+      // Production builds only, and counted only on the live domain (not on localhost or previews).
+      import.meta.env.PROD && (
+        <script
+          is:inline
+          defer
+          src="https://cloud.umami.is/script.js"
+          data-website-id={site.umamiWebsiteId}
+          data-domains={Astro.site?.hostname}
+        />
+      )
+    }
     <slot name="head" />
   </head>
   <body>
