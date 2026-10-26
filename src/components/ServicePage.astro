@@ -16,7 +16,7 @@ const others = services.filter((s) => s.slug !== service.slug);
 ---
 
 <Base title={service.meta.title} description={service.meta.description}>
-  <Header home={home} />
+  <Header home={home} contact="#kontakt" />
   <main>
     <section class="grid-bg hero" aria-labelledby="service-title">
       <div class="container stack hero-inner">
@@ -143,8 +143,11 @@ const others = services.filter((s) => s.slug !== service.slug);
   .hero-inner {
     padding-block: clamp(56px, 9vw, 112px);
     gap: 24px;
-    max-width: calc(860px + 2 * var(--gutter));
-    margin-inline: 0;
+  }
+
+  /* Narrow text column, but the left edge stays on the shared centred container. */
+  .hero-inner > * {
+    max-width: 860px;
   }
 
   h1 {

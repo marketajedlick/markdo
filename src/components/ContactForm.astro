@@ -81,9 +81,6 @@ const action = formConfig.provider && !isNetlify ? formConfig.endpoint : undefin
   import { submitLead, type Lead } from '../lib/lead-form';
 
   const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  // Nobody fills in the form this fast; bots do.
-  const MIN_FILL_MS = 3000;
-  const loadedAt = Date.now();
 
   // Returns the Czech error message for a field, or '' when it is valid.
   const validators: Record<string, (value: string) => string> = {
@@ -98,6 +95,7 @@ const action = formConfig.provider && !isNetlify ? formConfig.endpoint : undefin
   const messages = document.querySelector<HTMLTemplateElement>('#lead-form-messages')!.content;
   const message = (key: string) => messages.querySelector(`[data-key="${key}"]`)!.textContent!.trim();
   let attempted = false;
+  let sending = false;
 
   form.noValidate = true;
 
@@ -119,13 +117,14 @@ const action = formConfig.provider && !isNetlify ? formConfig.endpoint : undefin
 
   const thanks = document.querySelector<HTMLDialogElement>('#lead-thanks')!;
   const submit = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+  const submitLabel = submit.textContent!;
 
   function showStatus(kind: 'success' | 'failure') {
     if (kind === 'success') {
       thanks.showModal();
       return;
     }
-    // Failure stays inline, next to the restored text.
+    // Failure stays inline, next to the visitor's text.
     if (thanks.open) thanks.close();
     status.textContent = message(kind);
     status.dataset.kind = kind;
@@ -145,6 +144,7 @@ const action = formConfig.provider && !isNetlify ? formConfig.endpoint : undefin
 
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
+    if (sending) return;
     attempted = true;
     status.hidden = true;
 
@@ -155,8 +155,9 @@ const action = formConfig.provider && !isNetlify ? formConfig.endpoint : undefin
       return;
     }
 
-    // Spam bot: filled the hidden field or submitted right after load. Look successful, send nothing.
-    if (fieldValue('_honey') || Date.now() - loadedAt < MIN_FILL_MS) {
+    // Spam bot: filled the hidden field. Look successful, send nothing.
+    // (No "too fast" check: autofill + paste is fast too, and a real lead must never be dropped.)
+    if (fieldValue('_honey')) {
       form.reset();
       showStatus('success');
       return;
@@ -170,22 +171,27 @@ const action = formConfig.provider && !isNetlify ? formConfig.endpoint : undefin
       message: fieldValue('message'),
     };
 
-    // Optimistic: thank the visitor right away and send in the background (the services take
-    // seconds). If sending fails while they are still here, say so and give their text back.
-    form.reset();
-    attempted = false;
-    showStatus('success');
-    submitLead(lead).catch((err) => {
+    // Thank the visitor only once the service has accepted the lead; on failure their text stays put.
+    setSending(true);
+    try {
+      await submitLead(lead);
+      form.reset();
+      attempted = false;
+      showStatus('success');
+    } catch (err) {
       console.error(err);
-      restore(lead);
       showStatus('failure');
-    });
+    } finally {
+      setSending(false);
+    }
   });
 
-  function restore(lead: Lead) {
-    for (const [name, value] of Object.entries(lead)) {
-      (form.elements.namedItem(name) as HTMLInputElement).value = value;
-    }
+  // aria-disabled instead of disabled: the button keeps focus while the request runs.
+  function setSending(on: boolean) {
+    sending = on;
+    form.setAttribute('aria-busy', String(on));
+    submit.setAttribute('aria-disabled', String(on));
+    submit.textContent = on ? 'Odesílám…' : submitLabel;
   }
 </script>
 
@@ -244,6 +250,11 @@ const action = formConfig.provider && !isNetlify ? formConfig.endpoint : undefin
   .error {
     font-size: 15px;
     color: var(--danger);
+  }
+
+  .submit[aria-disabled='true'] {
+    cursor: progress;
+    opacity: 0.7;
   }
 
   .thanks {
