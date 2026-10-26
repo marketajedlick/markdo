@@ -1,10 +1,12 @@
 ---
 import { site } from '../config';
+
+const year = new Date().getFullYear();
 ---
 
 <footer class="footer">
   <div class="container inner">
-    <span>© 2026 MarkDo · Markéta Jedličková &amp; Dodo Dobrik</span>
+    <span>© {year} MarkDo · Markéta Jedličková &amp; Dodo Dobrik</span>
     <div class="links">
       <a href={site.privacyUrl}>Osobní údaje</a>
       <a href={site.emailHref}>{site.email}</a>
