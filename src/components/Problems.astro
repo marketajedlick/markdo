@@ -15,14 +15,13 @@ const problems = [
 ];
 ---
 
-<section class="section" aria-labelledby="problemy-title">
+<section class="section problems" aria-labelledby="problemy-title">
   <div class="container stack inner">
     <h2 id="problemy-title" class="h2 title">Znáte to?</h2>
     <div class="hairline-grid grid">
       {
-        problems.map((problem, i) => (
+        problems.map((problem) => (
           <article class="stack item">
-            <span class="mono subtle num">{String(i + 1).padStart(2, '0')}</span>
             <h3 class="h3">{problem.title}</h3>
             <p class="muted">{problem.text}</p>
           </article>
@@ -33,6 +32,11 @@ const problems = [
 </section>
 
 <style>
+  /* Tinted band so the section reads apart from the hero; numbering is left to the process below. */
+  .problems {
+    background: var(--bg-alt);
+  }
+
   .inner {
     gap: 40px;
   }
@@ -55,13 +59,7 @@ const problems = [
   .item {
     padding: 32px;
     gap: 12px;
-  }
-
-  .num {
-    font-size: 40px;
-    line-height: 1;
-    letter-spacing: -0.03em;
-    margin-bottom: 8px;
+    background: var(--surface);
   }
 
   /* Mobile: short standalone blocks centred (long text stays left-aligned). */
