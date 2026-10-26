@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MarkDo – AI pro firmy</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+body{margin:0;background:#EFE9DF}
+a{color:#16171A}a:hover{color:#2340D9}
+.btn-primary:hover{filter:brightness(1.08)}
+.btn-ghost:hover{border-color:#16171A !important}
+.field:focus{outline:2px solid #2340D9;outline-offset:1px}
+@media (max-width: 820px){.nav-links{display:none !important}}
+</style>
+</head>
+<body>
+<div style="background: #EFE9DF; color: #16171A; font-family: 'Geist', ui-sans-serif, system-ui, sans-serif; font-size: 19px; line-height: 1.6; min-height: 100vh">
+
+<!-- NAV -->
+<header style="border-bottom: 1px solid #D8D0C2">
+<div style="max-width: 1200px; margin: 0 auto; padding: 18px clamp(20px, 5vw, 48px); display: flex; align-items: center; justify-content: space-between; gap: 24px">
+<a href="#top" style="display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 600; font-size: 19px; letter-spacing: -0.02em">
+<span aria-hidden="true" style="width: 22px; height: 22px; border: 2px solid #2340D9; border-radius: 5px; display: grid; place-items: center"><span style="width: 8px; height: 8px; background: #2340D9; border-radius: 2px"></span></span>
+<span>MarkDo</span>
+</a>
+<nav class="nav-links" style="display: flex; gap: 32px; font-size: 17px">
+<a href="#proces" style="text-decoration: none; color: #3A3C42">Jak pracujeme</a>
+<a href="#pripadovka" style="text-decoration: none; color: #3A3C42">Případovka</a>
+<a href="#tym" style="text-decoration: none; color: #3A3C42">Kdo jsme</a>
+</nav>
+<a href="#kontakt" class="btn-primary" style="background: #2340D9; color: #FFFFFF; text-decoration: none; font-weight: 600; font-size: 17px; padding: 11px 18px; border-radius: 8px; min-height: 44px; box-sizing: border-box; display: inline-flex; align-items: center; white-space: nowrap">Konzultace zdarma</a>
+</div>
+</header>
+
+<!-- HERO -->
+<section id="top" style="background-image: linear-gradient(#E4DDD0 1px, transparent 1px), linear-gradient(90deg, #E4DDD0 1px, transparent 1px); background-size: 48px 48px; border-bottom: 1px solid #D8D0C2">
+<div style="max-width: 1200px; margin: 0 auto; padding: clamp(56px, 9vw, 120px) clamp(20px, 5vw, 48px); display: flex; flex-wrap: wrap; gap: 56px; align-items: center">
+<div style="flex: 1 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 28px">
+<p style="margin: 0; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 15px; letter-spacing: 0.06em; text-transform: uppercase; color: #2340D9">AI pro malé a střední firmy</p>
+<h1 style="margin: 0; font-size: clamp(40px, 6vw, 72px); line-height: 1.02; letter-spacing: -0.035em; font-weight: 600; text-wrap: balance">Zavedeme AI do firmy tak, aby opravdu šetřila čas.</h1>
+<p style="margin: 0; font-size: clamp(20px, 1.8vw, 23px); color: #36383D; max-width: 560px; text-wrap: pretty">Najdeme procesy, které vás zdržují, navrhneme řešení na míru a naučíme tým s ním pracovat. Inženýrská hloubka a systémový design v jednom týmu.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<a href="#kontakt" class="btn-primary" style="background: #2340D9; color: #FFFFFF; text-decoration: none; font-weight: 600; padding: 15px 24px; border-radius: 10px; min-height: 52px; box-sizing: border-box; display: inline-flex; align-items: center">Domluvit konzultaci zdarma</a>
+<a href="#proces" class="btn-ghost" style="border: 1px solid #8A8070; color: #16171A; text-decoration: none; font-weight: 500; padding: 15px 24px; border-radius: 10px; min-height: 52px; box-sizing: border-box; display: inline-flex; align-items: center">Jak to probíhá</a>
+</div>
+</div>
+
+<!-- flow visual -->
+<div aria-label="Ukázka automatizovaného procesu fakturace" role="img" style="flex: 1 1 380px; min-width: 0; background: #F8F4EC; border: 1px solid #D3CABB; border-radius: 16px; padding: 28px; display: flex; flex-direction: column; gap: 0; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 16px">
+<div style="display: flex; justify-content: space-between; color: #4B4D53; font-size: 14px; text-transform: uppercase; letter-spacing: 0.06em; padding-bottom: 20px"><span>proces / fakturace</span><span style="color: #2340D9">● běží</span></div>
+<div style="border: 1px solid #D3CABB; border-radius: 10px; padding: 14px 16px; display: flex; justify-content: space-between; gap: 12px"><span>Faktura přijde e-mailem</span><span style="color: #4B4D53">vstup</span></div>
+<div aria-hidden="true" style="width: 1px; height: 22px; background: #8A8070; margin-left: 24px"></div>
+<div style="border: 1px solid #2340D9; border-radius: 10px; padding: 14px 16px; display: flex; justify-content: space-between; gap: 12px; background: #FFFFFF"><span>AI vytěží údaje</span><span style="color: #2340D9">AI</span></div>
+<div aria-hidden="true" style="width: 1px; height: 22px; background: #8A8070; margin-left: 24px"></div>
+<div style="border: 1px solid #D3CABB; border-radius: 10px; padding: 14px 16px; display: flex; justify-content: space-between; gap: 12px"><span>Kontrola člověkem</span><span style="color: #4B4D53">1 klik</span></div>
+<div aria-hidden="true" style="width: 1px; height: 22px; background: #8A8070; margin-left: 24px"></div>
+<div style="border: 1px solid #D3CABB; border-radius: 10px; padding: 14px 16px; display: flex; justify-content: space-between; gap: 12px"><span>Zápis do účetnictví</span><span style="color: #4B4D53">výstup</span></div>
+<div style="margin-top: 22px; padding-top: 18px; border-top: 1px dashed #D3CABB; display: flex; justify-content: space-between; gap: 12px; color: #36383D"><span>Dřív: [X h týdně]</span><span style="color: #16171A">Teď: [Y min]</span></div>
+</div>
+</div>
+</section>
+
+<!-- PROBLEM -->
+<section style="border-bottom: 1px solid #D8D0C2">
+<div style="max-width: 1200px; margin: 0 auto; padding: clamp(56px, 8vw, 104px) clamp(20px, 5vw, 48px); display: flex; flex-direction: column; gap: 40px">
+<h2 style="margin: 0; font-size: clamp(30px, 3.6vw, 44px); line-height: 1.1; letter-spacing: -0.025em; font-weight: 600; max-width: 720px; text-wrap: balance">Znáte to?</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 1px; background: #D8D0C2; border: 1px solid #D8D0C2; border-radius: 14px; overflow: hidden">
+<div style="background: #EFE9DF; padding: 32px; display: flex; flex-direction: column; gap: 12px">
+<span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 15px; color: #4B4D53">01</span>
+<h3 style="margin: 0; font-size: 24px; font-weight: 600; letter-spacing: -0.01em">Data se přepisují ručně</h3>
+<p style="margin: 0; color: #36383D">Faktury, objednávky, tabulky. Lidé kopírují údaje mezi systémy a dělají v tom chyby.</p>
+</div>
+<div style="background: #EFE9DF; padding: 32px; display: flex; flex-direction: column; gap: 12px">
+<span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 15px; color: #4B4D53">02</span>
+<h3 style="margin: 0; font-size: 24px; font-weight: 600; letter-spacing: -0.01em">Každý zkouší AI po svém</h3>
+<p style="margin: 0; color: #36383D">Někdo používá ChatGPT, někdo ne. Chybí pravidla, sdílené postupy a jistota, co se smí.</p>
+</div>
+<div style="background: #EFE9DF; padding: 32px; display: flex; flex-direction: column; gap: 12px">
+<span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 15px; color: #4B4D53">03</span>
+<h3 style="margin: 0; font-size: 24px; font-weight: 600; letter-spacing: -0.01em">Nevíte, kde začít</h3>
+<p style="margin: 0; color: #36383D">Nabídek je hodně a těžko se pozná, co vaší firmě reálně ušetří čas a co je jen trend.</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- PROCESS -->
+<section id="proces" style="border-bottom: 1px solid #D8D0C2">
+<div style="max-width: 1200px; margin: 0 auto; padding: clamp(56px, 8vw, 104px) clamp(20px, 5vw, 48px); display: flex; flex-direction: column; gap: 48px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 16px; max-width: 680px">
+<p style="margin: 0; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 15px; letter-spacing: 0.06em; text-transform: uppercase; color: #2340D9">Jak pracujeme</p>
+<h2 style="margin: 0; font-size: clamp(30px, 3.6vw, 44px); line-height: 1.1; letter-spacing: -0.025em; font-weight: 600; text-wrap: balance">Od první schůzky k fungujícím procesům</h2>
+</div>
+<p style="margin: 0; color: #36383D; max-width: 360px">Plán sestavíme podle potřeb vaší firmy. Každý krok lze objednat i samostatně.</p>
+</div>
+<ol style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; border-top: 1px solid #D8D0C2">
+<li style="display: flex; flex-wrap: wrap; gap: 16px 40px; padding: 28px 0; border-bottom: 1px solid #D8D0C2">
+<span style="flex: 0 0 64px; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 16px; color: #2340D9">01</span>
+<div style="flex: 1 1 300px; min-width: 0; display: flex; flex-direction: column; gap: 6px"><h3 style="margin: 0; font-size: 25px; font-weight: 600; letter-spacing: -0.01em">Konzultace zdarma</h3><p style="margin: 0; color: #36383D">Probereme, jak firma funguje a kde ztrácí čas. Bez závazků.</p></div>
+<p style="flex: 1 1 260px; min-width: 0; margin: 0; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 16px; color: #4B4D53">Výstup: první tipy, kde AI dává smysl</p>
+</li>
+<li style="display: flex; flex-wrap: wrap; gap: 16px 40px; padding: 28px 0; border-bottom: 1px solid #D8D0C2">
+<span style="flex: 0 0 64px; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 16px; color: #2340D9">02</span>
+<div style="flex: 1 1 300px; min-width: 0; display: flex; flex-direction: column; gap: 6px"><h3 style="margin: 0; font-size: 25px; font-weight: 600; letter-spacing: -0.01em">Workshop pro tým</h3><p style="margin: 0; color: #36383D">Prakticky na vašich úkolech a datech. Tým odchází s postupy, které druhý den použije.</p></div>
+<p style="flex: 1 1 260px; min-width: 0; margin: 0; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 16px; color: #4B4D53">Výstup: sdílené postupy a pravidla</p>
+</li>
+<li style="display: flex; flex-wrap: wrap; gap: 16px 40px; padding: 28px 0; border-bottom: 1px solid #D8D0C2">
+<span style="flex: 0 0 64px; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 16px; color: #2340D9">03</span>
+<div style="flex: 1 1 300px; min-width: 0; display: flex; flex-direction: column; gap: 6px"><h3 style="margin: 0; font-size: 25px; font-weight: 600; letter-spacing: -0.01em">Plán AI integrace</h3><p style="margin: 0; color: #36383D">Zmapujeme procesy a seřadíme příležitosti podle přínosu a náročnosti.</p></div>
+<p style="flex: 1 1 260px; min-width: 0; margin: 0; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 16px; color: #4B4D53">Výstup: plán s prioritami na míru</p>
+</li>
+<li style="display: flex; flex-wrap: wrap; gap: 16px 40px; padding: 28px 0; border-bottom: 1px solid #D8D0C2">
+<span style="flex: 0 0 64px; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 16px; color: #2340D9">04</span>
+<div style="flex: 1 1 300px; min-width: 0; display: flex; flex-direction: column; gap: 6px"><h3 style="margin: 0; font-size: 25px; font-weight: 600; letter-spacing: -0.01em">Implementace procesů</h3><p style="margin: 0; color: #36383D">Automatizace nastavíme, napojíme na vaše nástroje a otestujeme v provozu.</p></div>
+<p style="flex: 1 1 260px; min-width: 0; margin: 0; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 16px; color: #4B4D53">Výstup: fungující automatizace</p>
+</li>
+<li style="display: flex; flex-wrap: wrap; gap: 16px 40px; padding: 28px 0; border-bottom: 1px solid #D8D0C2">
+<span style="flex: 0 0 64px; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 16px; color: #2340D9">05</span>
+<div style="flex: 1 1 300px; min-width: 0; display: flex; flex-direction: column; gap: 6px"><h3 style="margin: 0; font-size: 25px; font-weight: 600; letter-spacing: -0.01em">Firemní program</h3><p style="margin: 0; color: #36383D">Několik týdnů průběžné podpory, aby nové postupy ve firmě zůstaly.</p></div>
+<p style="flex: 1 1 260px; min-width: 0; margin: 0; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 16px; color: #4B4D53">Délka: [X týdnů]</p>
+</li>
+</ol>
+</div>
+</section>
+
+<!-- WHY US -->
+<section style="border-bottom: 1px solid #D8D0C2; background: #E8E1D5">
+<div style="max-width: 1200px; margin: 0 auto; padding: clamp(56px, 8vw, 104px) clamp(20px, 5vw, 48px); display: flex; flex-direction: column; gap: 48px">
+<div style="display: flex; flex-direction: column; gap: 16px; max-width: 760px">
+<p style="margin: 0; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 15px; letter-spacing: 0.06em; text-transform: uppercase; color: #2340D9">Proč my</p>
+<h2 style="margin: 0; font-size: clamp(30px, 3.6vw, 44px); line-height: 1.1; letter-spacing: -0.025em; font-weight: 600; text-wrap: balance">Technika, která funguje. Design, se kterým lidé chtějí pracovat.</h2>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 20px">
+<div style="border: 1px solid #D3CABB; border-radius: 14px; padding: 32px; display: flex; flex-direction: column; gap: 12px">
+<h3 style="margin: 0; font-size: 24px; font-weight: 600">Technická hloubka</h3>
+<p style="margin: 0; color: #36383D">Víme, co se děje pod kapotou: data, modely, integrace. Řešení stavíme tak, aby byla spolehlivá a bezpečná.</p>
+</div>
+<div style="border: 1px solid #D3CABB; border-radius: 14px; padding: 32px; display: flex; flex-direction: column; gap: 12px">
+<h3 style="margin: 0; font-size: 24px; font-weight: 600">Systémový design</h3>
+<p style="margin: 0; color: #36383D">Proces navrhujeme celý, ne jen nástroj. Aby do sebe kroky zapadaly a tým je přijal.</p>
+</div>
+<div style="border: 1px solid #D3CABB; border-radius: 14px; padding: 32px; display: flex; flex-direction: column; gap: 12px">
+<h3 style="margin: 0; font-size: 24px; font-weight: 600">Výsledek místo prezentace</h3>
+<p style="margin: 0; color: #36383D">Končíme u věcí, které běží a šetří čas. Ne u slajdů s doporučeními.</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- CASE STUDY -->
+<section id="pripadovka" style="border-bottom: 1px solid #D8D0C2">
+<div style="max-width: 1200px; margin: 0 auto; padding: clamp(56px, 8vw, 104px) clamp(20px, 5vw, 48px); display: flex; flex-wrap: wrap; gap: 48px">
+<div style="flex: 1 1 360px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<p style="margin: 0; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 15px; letter-spacing: 0.06em; text-transform: uppercase; color: #2340D9">Případovka</p>
+<h2 style="margin: 0; font-size: clamp(30px, 3.6vw, 44px); line-height: 1.1; letter-spacing: -0.025em; font-weight: 600; text-wrap: balance">Automatická fakturace pro [typ firmy]</h2>
+<p style="margin: 0; color: #36383D">[Jedna věta o klientovi: obor, velikost, co dělá.]</p>
+</div>
+<div style="flex: 1 1 520px; min-width: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 1px; background: #D8D0C2; border: 1px solid #D8D0C2; border-radius: 14px; overflow: hidden">
+<div style="background: #EFE9DF; padding: 28px; display: flex; flex-direction: column; gap: 10px"><span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 15px; color: #4B4D53">Problém</span><p style="margin: 0">[Jak fakturace probíhala dřív a co bolelo.]</p></div>
+<div style="background: #EFE9DF; padding: 28px; display: flex; flex-direction: column; gap: 10px"><span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 15px; color: #4B4D53">Řešení</span><p style="margin: 0">[Co jsme nastavili a s jakými nástroji.]</p></div>
+<div style="background: #EFE9DF; padding: 28px; display: flex; flex-direction: column; gap: 10px"><span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 15px; color: #4B4D53">Výsledek</span><p style="margin: 0; font-size: 28px; font-weight: 600; letter-spacing: -0.02em; color: #2340D9">[X h / měsíc]</p><p style="margin: 0; color: #36383D">[ušetřeného času]</p></div>
+</div>
+</div>
+</section>
+
+<!-- TEAM -->
+<section id="tym" style="border-bottom: 1px solid #D8D0C2">
+<div style="max-width: 1200px; margin: 0 auto; padding: clamp(56px, 8vw, 104px) clamp(20px, 5vw, 48px); display: flex; flex-direction: column; gap: 48px">
+<div style="display: flex; flex-direction: column; gap: 16px">
+<p style="margin: 0; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 15px; letter-spacing: 0.06em; text-transform: uppercase; color: #2340D9">Kdo jsme</p>
+<h2 style="margin: 0; font-size: clamp(30px, 3.6vw, 44px); line-height: 1.1; letter-spacing: -0.025em; font-weight: 600">Inženýrka a designér</h2>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 24px">
+<article style="border: 1px solid #D3CABB; border-radius: 16px; padding: 24px; display: flex; flex-wrap: wrap; gap: 24px">
+<div role="img" aria-label="Místo pro fotku Markéty" style="flex: 0 0 160px; height: 200px; border-radius: 10px; background: #E4DDD0; border: 1px dashed #8A8070; display: grid; place-items: center; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 14px; color: #4B4D53">[FOTO]</div>
+<div style="flex: 1 1 220px; min-width: 0; display: flex; flex-direction: column; gap: 8px">
+<h3 style="margin: 0; font-size: 25px; font-weight: 600">Markéta Jedličková</h3>
+<p style="margin: 0; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 15px; color: #2340D9">Data &amp; AI inženýrka</p>
+<p style="margin: 0; color: #36383D">Navrhuje a staví datová a AI řešení v CRUXO. Pořádá TEDxPrague. [Doplnit 1–2 věty o zkušenostech s firmami.]</p>
+</div>
+</article>
+<article style="border: 1px solid #D3CABB; border-radius: 16px; padding: 24px; display: flex; flex-wrap: wrap; gap: 24px">
+<div role="img" aria-label="Místo pro fotku Doda" style="flex: 0 0 160px; height: 200px; border-radius: 10px; background: #E4DDD0; border: 1px dashed #8A8070; display: grid; place-items: center; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 14px; color: #4B4D53">[FOTO]</div>
+<div style="flex: 1 1 220px; min-width: 0; display: flex; flex-direction: column; gap: 8px">
+<h3 style="margin: 0; font-size: 25px; font-weight: 600">Dodo Dobrik</h3>
+<p style="margin: 0; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 15px; color: #2340D9">Systémový designér</p>
+<p style="margin: 0; color: #36383D">[Bio: zaměření, zkušenosti, pro koho navrhoval.]</p>
+</div>
+</article>
+</div>
+</div>
+</section>
+
+<!-- CONTACT FORM -->
+<section id="kontakt" style="background-image: linear-gradient(#E4DDD0 1px, transparent 1px), linear-gradient(90deg, #E4DDD0 1px, transparent 1px); background-size: 48px 48px">
+<div style="max-width: 1200px; margin: 0 auto; padding: clamp(56px, 8vw, 112px) clamp(20px, 5vw, 48px); display: flex; flex-wrap: wrap; gap: 56px">
+<div style="flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+<p style="margin: 0; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 15px; letter-spacing: 0.06em; text-transform: uppercase; color: #2340D9">Konzultace zdarma</p>
+<h2 style="margin: 0; font-size: clamp(32px, 4.4vw, 52px); line-height: 1.05; letter-spacing: -0.03em; font-weight: 600; text-wrap: balance">Napište nám, co vás ve firmě nejvíc zdržuje.</h2>
+<p style="margin: 0; color: #36383D; max-width: 440px">Ozveme se [do X pracovních dnů] a domluvíme nezávaznou konzultaci. Cenu stanovíme až podle toho, co budete potřebovat.</p>
+</div>
+<form style="flex: 1 1 480px; min-width: 0; background: #F8F4EC; border: 1px solid #D3CABB; border-radius: 16px; padding: clamp(20px, 3vw, 36px); display: flex; flex-direction: column; gap: 18px">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); gap: 18px">
+<label style="display: flex; flex-direction: column; gap: 8px; font-size: 16px; color: #3A3C42">Jméno<input class="field" type="text" name="name" style="background: #EFE9DF; border: 1px solid #8A8070; border-radius: 8px; padding: 12px 14px; min-height: 46px; box-sizing: border-box; color: #16171A; font: inherit; font-size: 16px"></label>
+<label style="display: flex; flex-direction: column; gap: 8px; font-size: 16px; color: #3A3C42">Firma<input class="field" type="text" name="company" style="background: #EFE9DF; border: 1px solid #8A8070; border-radius: 8px; padding: 12px 14px; min-height: 46px; box-sizing: border-box; color: #16171A; font: inherit; font-size: 16px"></label>
+<label style="display: flex; flex-direction: column; gap: 8px; font-size: 16px; color: #3A3C42">E-mail<input class="field" type="email" name="email" style="background: #EFE9DF; border: 1px solid #8A8070; border-radius: 8px; padding: 12px 14px; min-height: 46px; box-sizing: border-box; color: #16171A; font: inherit; font-size: 16px"></label>
+<label style="display: flex; flex-direction: column; gap: 8px; font-size: 16px; color: #3A3C42">Počet zaměstnanců<select class="field" name="size" style="background: #EFE9DF; border: 1px solid #8A8070; border-radius: 8px; padding: 12px 14px; min-height: 46px; box-sizing: border-box; color: #16171A; font: inherit; font-size: 16px"><option>1–10</option><option>11–50</option><option>51–250</option><option>250+</option></select></label>
+</div>
+<label style="display: flex; flex-direction: column; gap: 8px; font-size: 16px; color: #3A3C42">Co vás nejvíc zdržuje?<textarea class="field" name="message" rows="4" placeholder="Např. ruční zpracování faktur, odpovídání na stejné dotazy zákazníků…" style="background: #EFE9DF; border: 1px solid #8A8070; border-radius: 8px; padding: 12px 14px; box-sizing: border-box; color: #16171A; font: inherit; font-size: 16px; resize: vertical"></textarea></label>
+<button type="button" class="btn-primary" style="background: #2340D9; color: #FFFFFF; border: 0; font: inherit; font-weight: 600; padding: 15px 24px; border-radius: 10px; min-height: 52px; cursor: pointer">Odeslat a domluvit konzultaci</button>
+<p style="margin: 0; font-size: 15px; color: #4B4D53">Odesláním souhlasíte se [zpracováním osobních údajů].</p>
+</form>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer style="border-top: 1px solid #D8D0C2">
+<div style="max-width: 1200px; margin: 0 auto; padding: 32px clamp(20px, 5vw, 48px); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; font-size: 16px; color: #4B4D53">
+<span>© 2026 MarkDo · Markéta Jedličková &amp; Dodo Dobrik</span>
+<div style="display: flex; flex-wrap: wrap; gap: 24px"><a href="mailto:[email]" style="color: #3A3C42">[e-mail]</a><a href="https://www.linkedin.com" style="color: #3A3C42">LinkedIn</a></div>
+</div>
+</footer>
+
+</div>
+</body>
+</html>

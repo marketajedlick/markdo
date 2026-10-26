@@ -1,0 +1,75 @@
+---
+import { asset } from '../config';
+
+interface Props {
+  name: string;
+  role: string;
+  bio: string;
+  /** Path inside /public, e.g. "team/marketa.jpg". Without it a placeholder is shown. */
+  photo?: string;
+  photoAlt: string;
+}
+
+const { name, role, bio, photo, photoAlt } = Astro.props;
+---
+
+<article class="member">
+  {
+    photo ? (
+      <img class="photo" src={asset(photo)} alt={photoAlt} width="160" height="200" loading="lazy" />
+    ) : (
+      <div class="photo placeholder" role="img" aria-label={photoAlt}>[FOTO]</div>
+    )
+  }
+  <div class="stack body">
+    <h3 class="name">{name}</h3>
+    <p class="mono role">{role}</p>
+    <p class="muted">{bio}</p>
+  </div>
+</article>
+
+<style>
+  .member {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    padding: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  .photo {
+    flex: 0 0 160px;
+    width: 160px;
+    height: 200px;
+    border-radius: var(--radius-md);
+    object-fit: cover;
+  }
+
+  .placeholder {
+    box-sizing: content-box; /* the dashed border sits outside 160×200, as in the mockup */
+    background: var(--grid-line);
+    border: 1px dashed var(--border-strong);
+    display: grid;
+    place-items: center;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: var(--text-subtle);
+  }
+
+  .body {
+    flex: 1 1 220px;
+    min-width: 0;
+    gap: 8px;
+  }
+
+  .name {
+    font-size: 25px;
+    font-weight: 600;
+  }
+
+  .role {
+    font-size: 15px;
+    color: var(--accent);
+  }
+</style>

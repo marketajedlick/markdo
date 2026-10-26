@@ -1,0 +1,56 @@
+---
+const problems = [
+  {
+    title: 'Data se přepisují ručně',
+    text: 'Faktury, objednávky, tabulky. Lidé kopírují údaje mezi systémy a dělají v tom chyby.',
+  },
+  {
+    title: 'Každý zkouší AI po svém',
+    text: 'Někdo používá ChatGPT, někdo ne. Chybí pravidla, sdílené postupy a jistota, co se smí.',
+  },
+  {
+    title: 'Nevíte, kde začít',
+    text: 'Nabídek je hodně a těžko se pozná, co vaší firmě reálně ušetří čas a co je jen trend.',
+  },
+];
+---
+
+<section class="section" aria-labelledby="problemy-title">
+  <div class="container stack inner">
+    <h2 id="problemy-title" class="h2 title">Znáte to?</h2>
+    <div class="hairline-grid grid">
+      {
+        problems.map((problem, i) => (
+          <article class="stack item">
+            <span class="mono subtle num">{String(i + 1).padStart(2, '0')}</span>
+            <h3 class="h3">{problem.title}</h3>
+            <p class="muted">{problem.text}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .inner {
+    gap: 40px;
+  }
+
+  .title {
+    max-width: 720px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+  }
+
+  .item {
+    padding: 32px;
+    gap: 12px;
+  }
+
+  .num {
+    font-size: 15px;
+  }
+</style>

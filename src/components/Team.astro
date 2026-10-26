@@ -1,0 +1,41 @@
+---
+import SectionHeading from './SectionHeading.astro';
+import TeamCard from './TeamCard.astro';
+
+// Once photos exist, add them to /public/team/ and set `photo: 'team/marketa.jpg'` etc.
+const members = [
+  {
+    name: 'Markéta Jedličková',
+    role: 'Data & AI inženýrka',
+    bio: 'Navrhuje a staví datová a AI řešení v CRUXO. Pořádá TEDxPrague. [Doplnit 1–2 věty o zkušenostech s firmami.]',
+    photoAlt: 'Místo pro fotku Markéty',
+  },
+  {
+    name: 'Dodo Dobrik',
+    role: 'Systémový designér',
+    bio: '[Bio: zaměření, zkušenosti, pro koho navrhoval.]',
+    photoAlt: 'Místo pro fotku Doda',
+  },
+];
+---
+
+<section id="tym" class="section" aria-labelledby="tym-title">
+  <div class="container stack inner">
+    <SectionHeading id="tym-title" eyebrow="Kdo jsme" title="Inženýrka a designér" />
+    <div class="grid">
+      {members.map((member) => <TeamCard {...member} />)}
+    </div>
+  </div>
+</section>
+
+<style>
+  .inner {
+    gap: 48px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr));
+    gap: 24px;
+  }
+</style>

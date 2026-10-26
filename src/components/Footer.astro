@@ -1,0 +1,47 @@
+---
+import { site } from '../config';
+---
+
+<footer class="footer">
+  <div class="container inner">
+    <span>© 2026 MarkDo · Markéta Jedličková &amp; Dodo Dobrik</span>
+    <div class="links">
+      <a href={site.emailHref}>{site.email}</a>
+      <a href={site.linkedin}>LinkedIn</a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    border-top: 1px solid var(--line);
+  }
+
+  .inner {
+    padding-block: 32px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    font-size: 16px;
+    color: var(--text-subtle);
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  .links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: var(--text-nav);
+  }
+
+  .links a:hover {
+    color: var(--accent);
+  }
+</style>

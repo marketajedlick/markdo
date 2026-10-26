@@ -1,0 +1,54 @@
+---
+// Only the latin + latin-ext subsets: that covers Czech and keeps the CSS small.
+import '@fontsource/geist/latin-400.css';
+import '@fontsource/geist/latin-ext-400.css';
+import '@fontsource/geist/latin-500.css';
+import '@fontsource/geist/latin-ext-500.css';
+import '@fontsource/geist/latin-600.css';
+import '@fontsource/geist/latin-ext-600.css';
+import '@fontsource/geist/latin-700.css';
+import '@fontsource/geist/latin-ext-700.css';
+import '@fontsource/geist-mono/latin-400.css';
+import '@fontsource/geist-mono/latin-ext-400.css';
+import '@fontsource/geist-mono/latin-500.css';
+import '@fontsource/geist-mono/latin-ext-500.css';
+import '../styles/global.css';
+import { site, asset } from '../config';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = site.title, description = site.description } = Astro.props;
+// GitHub Pages serves directories with a trailing slash ("/markdo/").
+const canonical = new URL(Astro.url.pathname.replace(/\/?$/, '/'), Astro.site);
+const ogImage = new URL(asset(site.ogImage), Astro.site);
+---
+
+<!doctype html>
+<html lang="cs">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href={asset('favicon.svg')} />
+    <meta name="theme-color" content="#EFE9DF" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="cs_CZ" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

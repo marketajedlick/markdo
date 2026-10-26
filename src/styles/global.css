@@ -1,0 +1,212 @@
+:root {
+  --bg: #efe9df;
+  --bg-alt: #e8e1d5;
+  --surface: #f8f4ec;
+  --grid-line: #e4ddd0;
+  --text: #16171a;
+  --text-muted: #36383d;
+  --text-subtle: #4b4d53;
+  --text-nav: #3a3c42;
+  --line: #d8d0c2;
+  --border: #d3cabb;
+  --border-strong: #8a8070;
+  --accent: #2340d9;
+  --on-accent: #ffffff;
+  --white: #ffffff;
+  --danger: #a3261b;
+
+  --font-sans: 'Geist', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, monospace;
+
+  --container: 1200px;
+  --gutter: clamp(20px, 5vw, 48px);
+  --section-y: clamp(56px, 8vw, 104px);
+
+  --radius-sm: 8px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 16px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 19px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+a {
+  color: var(--text);
+}
+
+a:hover {
+  color: var(--accent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+section[id] {
+  scroll-margin-top: 16px;
+}
+
+/* Layout */
+.container {
+  /* --container is the content width; the gutter sits outside it, as in the mockup. */
+  max-width: calc(var(--container) + 2 * var(--gutter));
+  margin: 0 auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  border-bottom: 1px solid var(--line);
+}
+
+.section > .container {
+  padding-block: var(--section-y);
+}
+
+.grid-bg {
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Typography */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.h2 {
+  font-size: clamp(30px, 3.6vw, 44px);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  font-weight: 600;
+  text-wrap: balance;
+}
+
+.h3 {
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.mono {
+  font-family: var(--font-mono);
+}
+
+.muted {
+  color: var(--text-muted);
+}
+
+.subtle {
+  color: var(--text-subtle);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 15px 24px;
+  border-radius: var(--radius-md);
+  font: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--on-accent);
+  border: 0;
+  font-weight: 600;
+}
+
+.btn-primary:hover {
+  color: var(--on-accent);
+  filter: brightness(1.08);
+}
+
+.btn-ghost {
+  border: 1px solid var(--border-strong);
+  color: var(--text);
+  font-weight: 500;
+}
+
+.btn-ghost:hover {
+  color: var(--text);
+  border-color: var(--text);
+}
+
+/* Cards */
+.card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Cells separated by 1px hairlines (problems, case study). */
+.hairline-grid {
+  display: grid;
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.hairline-grid > * {
+  background: var(--bg);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
