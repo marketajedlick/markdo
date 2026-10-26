@@ -3,6 +3,8 @@
 ## Placeholdery v textu (`[takhle]`)
 - [ ] Zásady osobních údajů (`src/pages/osobni-udaje.astro`): hotové, ideálně nechat jednou zkontrolovat.
 
+- [ ] Podstránky služeb (`src/lib/services.ts`): doplnit délku workshopu, počet účastníků, podporované nástroje a typickou délku celé spolupráce; pak sloučit PR a stránky nasadit.
+
 ## Otevřená rozhodnutí
 - [x] **Heslo před spuštěním.** Vypnuto 26. 10. 2026 (`gate.enabled = false` v `src/config.ts`), web je veřejný a indexovatelný. Zámek jde kdykoli znovu zapnout.
 - [x] **Formulář.** Web3Forms → info@markdo.cz (repository variables `PUBLIC_FORM_PROVIDER=web3forms`, `PUBLIC_FORM_ENDPOINT=https://api.web3forms.com/submit`, `PUBLIC_FORM_KEY`). Nastavení formuláře (příjemce) na web3forms.com.

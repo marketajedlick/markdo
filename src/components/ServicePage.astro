@@ -1,0 +1,346 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from './Header.astro';
+import SectionHeading from './SectionHeading.astro';
+import Contact from './Contact.astro';
+import Footer from './Footer.astro';
+import { services, type Service } from '../lib/services';
+
+interface Props {
+  service: Service;
+}
+
+const { service } = Astro.props;
+const home = import.meta.env.BASE_URL;
+const others = services.filter((s) => s.slug !== service.slug);
+---
+
+<Base title={service.meta.title} description={service.meta.description}>
+  <Header home={home} />
+  <main>
+    <section class="grid-bg hero" aria-labelledby="service-title">
+      <div class="container stack hero-inner">
+        <p class="eyebrow">{service.eyebrow}</p>
+        <h1 id="service-title">{service.title}</h1>
+        <p class="lead">{service.lead}</p>
+        <div class="actions">
+          <a href="#kontakt" class="btn btn-primary">Domluvit konzultaci zdarma</a>
+          <a href={`${home}#proces`} class="btn btn-ghost">Jak pracujeme</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="pro-koho">
+      <div class="container stack inner">
+        <SectionHeading id="pro-koho" title="Pro koho to je" />
+        <ul class="hairline-grid for-whom">
+          {
+            service.forWhom.map((item) => (
+              <li>
+                <span class="check" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="16" height="16">
+                    <path d="M5 12.5l4.5 4.5L19 7.5" />
+                  </svg>
+                </span>
+                {item}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="jak">
+      <div class="container stack inner">
+        <SectionHeading id="jak" eyebrow="Jak to probíhá" title="Krok za krokem" />
+        <ol class="steps">
+          {
+            service.steps.map((step, i) => (
+              <li class="step">
+                <span class="mono num">{String(i + 1).padStart(2, '0')}</span>
+                <div class="stack step-body">
+                  <h3 class="h3">{step.title}</h3>
+                  <p class="muted">{step.text}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <section class="section alt" aria-labelledby="vystupy">
+      <div class="container stack inner">
+        <SectionHeading id="vystupy" eyebrow="Co si odnesete" title="Výsledek, ne prezentace" />
+        <div class="outcomes">
+          {
+            service.outcomes.map((o) => (
+              <article class="card">
+                <h3 class="h3">{o.title}</h3>
+                <p class="muted">{o.text}</p>
+              </article>
+            ))
+          }
+        </div>
+        {
+          service.proof && (
+            <a class="proof" href={`${home}#pripadovka`}>
+              <span class="mono subtle">{service.proof.label}</span>
+              <span class="proof-value">{service.proof.value}</span>
+              <span class="muted">{service.proof.note} · celá případovka →</span>
+            </a>
+          )
+        }
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="faq">
+      <div class="container stack inner">
+        <SectionHeading id="faq" eyebrow="Časté otázky" title="Na co se nás ptáte" />
+        <div class="faq">
+          {
+            service.faq.map((item) => (
+              <details>
+                <summary>{item.q}</summary>
+                <p class="muted">{item.a}</p>
+              </details>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="dalsi">
+      <div class="container stack inner">
+        <SectionHeading id="dalsi" eyebrow="Další služby" title="Co dalšího pro vás uděláme" />
+        <div class="others">
+          {
+            others.map((s) => (
+              <a class="card other" href={`${home}${s.slug}/`}>
+                <span class="eyebrow">{s.eyebrow}</span>
+                <span class="h3">{s.name}</span>
+                <span class="muted">{s.meta.description}</span>
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <Contact />
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  .hero {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .hero-inner {
+    padding-block: clamp(56px, 9vw, 112px);
+    gap: 24px;
+    max-width: calc(860px + 2 * var(--gutter));
+    margin-inline: 0;
+  }
+
+  h1 {
+    font-size: clamp(36px, 5vw, 60px);
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+    font-weight: 600;
+    text-wrap: balance;
+  }
+
+  .lead {
+    font-size: clamp(20px, 1.8vw, 23px);
+    color: var(--text-muted);
+    max-width: 640px;
+    text-wrap: pretty;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .inner {
+    gap: 40px;
+  }
+
+  .for-whom {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 960px) {
+    .for-whom {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .for-whom li {
+    padding: 28px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+
+  .check {
+    flex: 0 0 26px;
+    height: 26px;
+    margin-top: 2px;
+    border-radius: 50%;
+    background: var(--accent);
+    display: grid;
+    place-items: center;
+  }
+
+  .check path {
+    fill: none;
+    stroke: var(--on-accent);
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .step {
+    display: flex;
+    gap: 16px 40px;
+    flex-wrap: wrap;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .num {
+    flex: 0 0 96px;
+    font-size: 44px;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--accent);
+  }
+
+  .step-body {
+    flex: 1 1 300px;
+    min-width: 0;
+    gap: 6px;
+    max-width: 720px;
+  }
+
+  .alt {
+    background: var(--bg-alt);
+  }
+
+  .outcomes,
+  .others {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+    gap: 20px;
+  }
+
+  .outcomes .card {
+    background: var(--surface);
+  }
+
+  .proof {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 8px 20px;
+    padding: 24px 28px;
+    border: 1px solid var(--accent);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    text-decoration: none;
+  }
+
+  .proof-value {
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--accent);
+  }
+
+  .faq {
+    border-top: 1px solid var(--line);
+    max-width: 860px;
+  }
+
+  details {
+    border-bottom: 1px solid var(--line);
+  }
+
+  summary {
+    cursor: pointer;
+    list-style: none;
+    padding: 22px 40px 22px 0;
+    min-height: 44px;
+    position: relative;
+    font-size: 21px;
+    font-weight: 600;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  summary::after {
+    content: '+';
+    position: absolute;
+    right: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: var(--font-mono);
+    font-size: 26px;
+    font-weight: 400;
+    color: var(--accent);
+  }
+
+  details[open] summary::after {
+    content: '−';
+  }
+
+  details p {
+    padding-bottom: 24px;
+    max-width: 720px;
+  }
+
+  .other {
+    text-decoration: none;
+    background: var(--surface);
+  }
+
+  .other:hover {
+    border-color: var(--accent);
+  }
+
+  /* Mobile: short standalone blocks centred, as on the homepage. */
+  @media (max-width: 640px) {
+    .hero-inner {
+      align-items: center;
+      text-align: center;
+    }
+
+    .actions {
+      width: 100%;
+    }
+
+    .actions .btn {
+      flex: 1 1 100%;
+    }
+
+    .num {
+      flex-basis: 100%;
+    }
+  }
+</style>
