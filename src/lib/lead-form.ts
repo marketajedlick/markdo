@@ -25,6 +25,9 @@ async function postJson(url: string, lead: Lead): Promise<void> {
     body: JSON.stringify(lead),
   });
   if (!res.ok) throw new Error(`Form endpoint responded ${res.status}`);
+  // FormSubmit answers 200 with {"success": "false"} e.g. before the address is activated.
+  const data = await res.json().catch(() => null);
+  if (data && String(data.success) === 'false') throw new Error(`Form endpoint refused: ${data.message ?? ''}`);
 }
 
 const adapters: Record<FormProvider, (lead: Lead) => Promise<void>> = {

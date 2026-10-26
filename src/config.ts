@@ -5,8 +5,8 @@ export const site = {
   description:
     'Zavedeme AI do firmy tak, aby opravdu šetřila čas. Najdeme procesy, které vás zdržují, navrhneme řešení na míru a naučíme tým s ním pracovat.',
   ogImage: 'og-placeholder.png',
-  email: '[e-mail]',
-  emailHref: 'mailto:[email]',
+  email: 'info@markdo.cz',
+  emailHref: 'mailto:info@markdo.cz',
   linkedin: [
     { label: 'LinkedIn Markéta', href: 'https://www.linkedin.com/in/marketajedlickova/' },
     { label: 'LinkedIn Dodo', href: 'https://www.linkedin.com/in/dodo-dobrik/' },
