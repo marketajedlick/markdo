@@ -1,20 +1,26 @@
 ---
 import Logo from './Logo.astro';
 
+interface Props {
+  /** Homepage URL to prefix the section anchors with; empty on the homepage itself. */
+  home?: string;
+}
+
+const { home = '' } = Astro.props;
 const links = [
-  { href: '#proces', label: 'Jak pracujeme' },
-  { href: '#pripadovka', label: 'Případovka' },
-  { href: '#tym', label: 'Kdo jsme' },
+  { href: `${home}#proces`, label: 'Jak pracujeme' },
+  { href: `${home}#pripadovka`, label: 'Případovka' },
+  { href: `${home}#tym`, label: 'Kdo jsme' },
 ];
 ---
 
 <header class="header">
   <div class="container inner">
-    <Logo />
+    <Logo href={`${home}#top`} />
     <nav class="links" aria-label="Hlavní navigace">
       {links.map((link) => <a href={link.href}>{link.label}</a>)}
     </nav>
-    <a href="#kontakt" class="btn btn-primary cta">Konzultace zdarma</a>
+    <a href={`${home}#kontakt`} class="btn btn-primary cta">Konzultace zdarma</a>
   </div>
 </header>
 

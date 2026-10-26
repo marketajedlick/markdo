@@ -4,13 +4,15 @@ import { site } from '../config';
 interface Props {
   /** Render as a link to the top of the page (default) or as plain text. */
   link?: boolean;
+  /** Link target; subpages point it at the homepage. */
+  href?: string;
 }
 
-const { link = true } = Astro.props;
+const { link = true, href = '#top' } = Astro.props;
 const Tag = link ? 'a' : 'span';
 ---
 
-<Tag href={link ? '#top' : undefined} class="logo">
+<Tag href={link ? href : undefined} class="logo">
   <span class="mark" aria-hidden="true"><span></span></span>
   <span>{site.name}</span>
 </Tag>

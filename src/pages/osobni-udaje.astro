@@ -1,0 +1,86 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { site } from '../config';
+
+const home = import.meta.env.BASE_URL;
+---
+
+<Base title="Zpracování osobních údajů – MarkDo" description="Jak MarkDo nakládá s osobními údaji z kontaktního formuláře.">
+  <Header home={home} />
+  <main class="section">
+    <article class="container stack legal">
+      <p class="eyebrow">Osobní údaje</p>
+      <h1 class="h2">Zpracování osobních údajů</h1>
+      <p class="muted">Platné od 26. 10. 2026</p>
+
+      <h2 class="h3">Kdo údaje zpracovává</h2>
+      <p>
+        Správcem je [jméno / obchodní firma], IČO [IČO], se sídlem [adresa]. Ve věcech osobních údajů nás
+        kontaktujte na <a href={site.emailHref}>{site.email}</a>.
+      </p>
+
+      <h2 class="h3">Jaké údaje a proč</h2>
+      <p>
+        Z kontaktního formuláře zpracováváme jméno, e-mail, název firmy, počet zaměstnanců a text vaší zprávy.
+        Používáme je jen k tomu, abychom vám odpověděli a domluvili konzultaci, případně připravili nabídku.
+      </p>
+      <p>
+        Právním základem je jednání o smlouvě na vaši žádost (čl. 6 odst. 1 písm. b) GDPR). Souhlas k tomu
+        nepotřebujeme a údaje nepoužíváme k marketingu.
+      </p>
+
+      <h2 class="h3">Jak dlouho</h2>
+      <p>
+        Pokud z komunikace nevznikne spolupráce, údaje smažeme nejpozději [12 měsíců] od posledního kontaktu.
+        Pokud spolupráce vznikne, uchováváme je po dobu jejího trvání a dál jen v rozsahu, který vyžadují
+        zákony (např. účetní předpisy).
+      </p>
+
+      <h2 class="h3">Kdo k nim má přístup</h2>
+      <p>
+        Údaje vidíme jen my dva. Technicky nám pomáhají zpracovatelé: GitHub (hosting webu), [služba pro
+        odesílání formuláře] a [poskytovatel e-mailu]. Někteří z nich mohou údaje zpracovávat i v USA, a to na
+        základě rozhodnutí Evropské komise o odpovídající ochraně (EU–US Data Privacy Framework) nebo
+        standardních smluvních doložek.
+      </p>
+
+      <h2 class="h3">Návštěva webu</h2>
+      <p>
+        Web nepoužívá cookies ani analytické nástroje. Hosting GitHub Pages může z bezpečnostních a provozních
+        důvodů zaznamenávat IP adresu návštěvníka.
+      </p>
+
+      <h2 class="h3">Vaše práva</h2>
+      <p>
+        Máte právo na přístup ke svým údajům, jejich opravu nebo výmaz, omezení zpracování, přenositelnost a
+        právo vznést námitku. Stačí napsat na <a href={site.emailHref}>{site.email}</a>. Pokud nebudete
+        spokojeni, můžete podat stížnost u Úřadu pro ochranu osobních údajů (<a href="https://uoou.gov.cz"
+          >uoou.gov.cz</a
+        >).
+      </p>
+    </article>
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  .legal {
+    max-width: calc(720px + 2 * var(--gutter));
+    padding-block: clamp(56px, 8vw, 112px);
+    gap: 16px;
+  }
+
+  .legal h1 {
+    margin-bottom: 4px;
+  }
+
+  .legal h2 {
+    margin-top: 24px;
+  }
+
+  .legal a {
+    text-decoration: underline;
+  }
+</style>
