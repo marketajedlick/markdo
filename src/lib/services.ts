@@ -67,6 +67,46 @@ export const services: Service[] = [
     ],
   },
   {
+    slug: 'plan-ai-integrace',
+    name: 'Plán AI integrace',
+    meta: {
+      title: 'Plán AI integrace – AI audit a priority pro vaši firmu | MarkDo',
+      description:
+        'Zmapujeme procesy ve firmě a seřadíme příležitosti pro AI podle přínosu a náročnosti. Dostanete plán na míru: co zavést nejdřív, co později a co vůbec.',
+    },
+    eyebrow: 'Plán AI integrace',
+    title: 'Plán AI integrace: co ve firmě zavést nejdřív a proč',
+    lead: 'Než do něčeho investujete, zmapujeme procesy a seřadíme příležitosti podle přínosu a náročnosti. Dostanete plán na míru, ne seznam nástrojů z internetu.',
+    forWhom: [
+      'Nevíte, kde AI ve firmě reálně ušetří čas a co je jen trend.',
+      'Chcete se rozhodovat podle toho, co vaší firmě přinese, ne podle módy.',
+      'Potřebujete podklad pro rozhodnutí vedení nebo pro rozpočet.',
+    ],
+    steps: [
+      { title: 'Rozhovory s týmem', text: 'Projdeme s lidmi, jak opravdu pracují a kde ztrácejí čas.' },
+      { title: 'Mapa procesů', text: 'Popíšeme klíčové procesy, nástroje a data, se kterými se v nich pracuje.' },
+      { title: 'Vyhodnocení příležitostí', text: 'U každé příležitosti odhadneme přínos, náročnost a rizika.' },
+      { title: 'Plán s prioritami', text: 'Seřadíme kroky: co zavést hned, co později a co se nevyplatí.' },
+    ],
+    outcomes: [
+      { title: 'Mapa procesů', text: 'Přehled, kde firma tráví čas a kde vznikají chyby.' },
+      { title: 'Seřazené příležitosti', text: 'Přínos a náročnost každé z nich, srozumitelně i pro vedení.' },
+      { title: 'Plán na míru', text: 'Konkrétní další kroky v pořadí, ve kterém dávají smysl.' },
+    ],
+    faq: [
+      { q: 'Jak dlouho příprava plánu trvá?', a: '[Doplnit typickou délku.]' },
+      {
+        q: 'Co k tomu potřebujete od nás?',
+        a: 'Hlavně čas lidí, kteří procesy znají. Rozsah domluvíme na úvodní konzultaci.',
+      },
+      {
+        q: 'Musíme pak automatizaci realizovat s vámi?',
+        a: 'Ne. Každý krok lze objednat i samostatně, plán je váš.',
+      },
+      priceAnswer,
+    ],
+  },
+  {
     slug: 'automatizace-procesu',
     name: 'Automatizace procesů',
     meta: {

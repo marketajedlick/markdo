@@ -241,11 +241,19 @@ const others = services.filter((s) => s.slug !== service.slug);
     background: var(--bg-alt);
   }
 
+  /* Three cards each: one column or three, never 2 + 1. */
   .outcomes,
   .others {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+    grid-template-columns: 1fr;
     gap: 20px;
+  }
+
+  @media (min-width: 960px) {
+    .outcomes,
+    .others {
+      grid-template-columns: repeat(3, 1fr);
+    }
   }
 
   .outcomes .card {
