@@ -11,6 +11,9 @@
   "dependencies": {
     "@fontsource/geist": "^5.3.0",
     "@fontsource/geist-mono": "^5.3.0",
-    "astro": "^5.18.2"
+    "astro": "^7.4.2"
+  },
+  "engines": {
+    "node": ">=22.23.4"
   }
 }

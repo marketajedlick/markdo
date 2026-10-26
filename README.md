@@ -5,6 +5,8 @@ Zadání a mockup jsou v `reference/` (`README.md`, `reference.html`), otevřen�
 
 ## Vývoj
 
+Potřebuje Node 22.23.4+ (verze je v `.nvmrc`, s nvm stačí `nvm use`).
+
 ```sh
 npm install
 npm run dev      # http://localhost:4321
