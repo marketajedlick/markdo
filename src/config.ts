@@ -11,6 +11,8 @@ export const site = {
     { label: 'LinkedIn Markéta', href: 'https://www.linkedin.com/in/marketajedlickova/' },
     { label: 'LinkedIn Dodo', href: 'https://www.linkedin.com/in/dodo-dobrik/' },
   ],
+  // Umami Cloud: cookieless visit statistics (cloud.umami.is).
+  umamiWebsiteId: 'dbb398b5-652c-4324-aec9-46765539562a',
   privacyUrl: `${import.meta.env.BASE_URL.replace(/\/$/, '')}/osobni-udaje/`,
 };
 
