@@ -12,6 +12,8 @@ export interface Service {
   facts: string[];
   forWhom: string[];
   steps: { title: string; text: string }[];
+  /** Heading above the outcomes; defaults to "Co získáte". */
+  outcomesTitle?: string;
   outcomes: { title: string; text: string }[];
   /** Optional proof from the case study on the homepage. */
   proof?: { label: string; value: string; note: string };
@@ -48,8 +50,8 @@ export const services: Service[] = [
         'Praktické AI školení pro firmy: ChatGPT, Copilot a další nástroje na vašich úkolech a datech. 1–12 lidí, od 1,5 hodiny po celý den, v Praze i online.',
     },
     eyebrow: 'Workshop pro tým',
-    title: 'AI školení pro firmy, které tým druhý den opravdu použije',
-    lead: 'Žádná obecná přednáška o ChatGPT. Pracujeme na vašich úkolech a datech, nastavíme pravidla, co se smí, a tým odchází s hotovými postupy.',
+    title: 'AI školení pro firmy: postupy pro každodenní práci',
+    lead: 'Pracujeme na vašich úkolech a datech, nastavíme pravidla, co se smí, a tým odchází s hotovými postupy.',
     facts: ['1–12 lidí', 'od 1,5 hodiny po celý den', 'Praha u vás ve firmě i online'],
     forWhom: [
       'Každý ve firmě zkouší AI po svém a chybí společná pravidla.',
@@ -60,18 +62,18 @@ export const services: Service[] = [
       { title: 'Krátký rozhovor předem', text: 'Zjistíme, na čem tým pracuje a kde nejvíc ztrácí čas.' },
       {
         title: 'Workshop na vašich úkolech',
-        text: 'Od 1,5 hodiny po celý den, podle potřeb firmy a velikosti skupiny. Každý si postupy vyzkouší na vlastní práci, ne na ukázkových příkladech.',
+        text: 'Od 1,5 hodiny po celý den, podle potřeb firmy a velikosti skupiny. Každý si postupy vyzkouší na vlastní práci.',
       },
       { title: 'Pravidla pro firmu', text: 'Sepíšeme, jaké nástroje a jaká data se smí používat a jak.' },
       {
         title: 'Po workshopu',
-        text: 'Tým dostane návody, šablony a záznam, ke kterým se může kdykoli vrátit. Když se objeví otázky, pomůžeme i potom.',
+        text: 'Tým dostane návody, šablony a záznam, ke kterým se může kdykoli vrátit. Na otázky z praxe odpovíme v rozsahu, který domluvíme předem.',
       },
     ],
     outcomes: [
-      { title: 'Návody a šablony', text: 'Pro vaše opakované úkoly, ne obecné tipy z internetu. Plus záznam workshopu.' },
+      { title: 'Návody a šablony', text: 'Pro opakované úkoly vašeho týmu. Plus záznam workshopu.' },
       { title: 'Pravidla používání AI', text: 'Jasno v tom, co se s firemními daty smí a co ne.' },
-      { title: 'Navazující podpora', text: 'Když se po workshopu objeví otázky, nezůstanete na to sami.' },
+      { title: 'Navazující podpora', text: 'Odpovědi na otázky, které vzniknou při práci. Rozsah domluvíme předem.' },
     ],
     faq: [
       {
@@ -106,7 +108,7 @@ export const services: Service[] = [
     },
     eyebrow: 'Plán AI integrace',
     title: 'Plán AI integrace: co ve firmě zavést nejdřív a proč',
-    lead: 'Než do něčeho investujete, zmapujeme procesy a seřadíme příležitosti podle přínosu a náročnosti. Dostanete plán na míru, ne seznam nástrojů z internetu.',
+    lead: 'Než do něčeho investujete, zmapujeme procesy a seřadíme příležitosti podle přínosu a náročnosti. Dostanete plán, co zavést nejdřív, co později a co se nevyplatí.',
     facts: ['zhruba 2 týdny', 'dokument, prezentace pro vedení nebo tabulka priorit', 'Praha i online'],
     forWhom: [
       'Nevíte, kde AI ve firmě reálně ušetří čas a co je jen trend.',
@@ -122,6 +124,7 @@ export const services: Service[] = [
         text: 'Seřadíme kroky: co zavést hned, co později a co se nevyplatí. Ve formě, která vám vyhovuje.',
       },
     ],
+    outcomesTitle: 'Budete vědět, čím začít a proč',
     outcomes: [
       { title: 'Mapa procesů', text: 'Přehled, kde firma tráví čas a kde vznikají chyby.' },
       { title: 'Seřazené příležitosti', text: 'Přínos a náročnost každé z nich, srozumitelně i pro vedení.' },
@@ -159,7 +162,7 @@ export const services: Service[] = [
     eyebrow: 'Automatizace procesů',
     title: 'Automatizace procesů s AI: méně přepisování, víc času na práci',
     lead: 'Faktury, objednávky, tabulky, e-maily. Najdeme, kde lidé ručně přepisují údaje, a nastavíme automatizaci napojenou na vaše nástroje. Co AI nepřečte s jistotou, zkontroluje člověk.',
-    facts: ['napojení na nástroje, které už máte', 'kontrola člověkem', 'know-how zůstává u vás'],
+    facts: ['propojení s vašimi nástroji', 'kontrola člověkem', 'know-how zůstává u vás'],
     forWhom: [
       'Lidé kopírují údaje mezi systémy a dělají v tom chyby.',
       'Účetní nebo asistence tráví hodiny zpracováním dokladů.',
@@ -179,7 +182,7 @@ export const services: Service[] = [
       { title: 'Fungující automatizace', text: 'Napojená na nástroje, které už používáte.' },
       { title: 'Tým, který ji umí spravovat', text: 'Školení ke správě, takže na nás nejste závislí.' },
     ],
-    proof: { label: 'Příklad: faktury ve filmové produkci', value: 'cca 60 h / rok', note: 'ušetřeného času účetní, realizace 1 h' },
+    proof: { label: 'Příklad: faktury ve filmové produkci', value: 'cca 60 h / rok', note: 'ušetřeného času účetní, nastavení za 1 h' },
     faq: [
       {
         q: 'Jaké procesy se dají automatizovat?',
@@ -187,11 +190,11 @@ export const services: Service[] = [
       },
       {
         q: 'S jakými nástroji to funguje?',
-        a: 'Prakticky s čímkoli, co už používáte: účetní software, Google Workspace, Microsoft 365, CRM, e-shop, tabulky i e-mail.',
+        a: 'Projdeme nástroje, které používáte, a ověříme možnosti propojení. Nejčastěji jde o účetní software, Google Workspace, Microsoft 365, CRM, e-shop, tabulky a e-mail.',
       },
       {
         q: 'Co když AI udělá chybu?',
-        a: 'Údaje, které AI nepřečte s jistotou, označí jako sporné a nechá je opravit člověkem. U ostatních stačí kontrola jedním klikem.',
+        a: 'Údaje, které AI nepřečte s jistotou, označí jako sporné a počká, až je člověk zkontroluje a opraví. Ostatní zapíše do přehledu, kde je u každého údaje odkaz na původní doklad. Co a jak často se kontroluje, nastavíme podle procesu.',
       },
       {
         q: 'Kdo bude automatizaci spravovat?',
@@ -216,7 +219,7 @@ export const services: Service[] = [
     eyebrow: 'Firemní program',
     title: 'Zavedení AI do firmy krok za krokem',
     lead: 'Od první konzultace po procesy, které fungují i za půl roku. Markéta řeší techniku a data, Dodo procesy a lidi, aby nová řešení fungovala a tým je opravdu přijal.',
-    facts: ['od 8 týdnů po průběžnou spolupráci', 'úvodní konzultace online a zdarma', 'Praha i online'],
+    facts: ['spolupráce od 8 týdnů', 'úvodní konzultace online a zdarma', 'Praha i online'],
     forWhom: [
       'Nevíte, kde začít, a nabídek je hodně.',
       'Chcete AI zavést systematicky, ne jen vyzkoušet.',
@@ -224,28 +227,28 @@ export const services: Service[] = [
     ],
     steps: [
       { title: 'Konzultace zdarma', text: 'Online. Probereme, jak firma funguje a kde ztrácí čas. Bez závazků.' },
-      { title: 'Workshop pro tým', text: 'Prakticky na vašich úkolech a datech. Tým odchází s postupy, které druhý den použije.' },
+      { title: 'Workshop pro tým', text: 'Prakticky na vašich úkolech a datech. Každý si postupy vyzkouší na vlastní práci.' },
       { title: 'Plán AI integrace', text: 'Zmapujeme procesy a seřadíme příležitosti podle přínosu a náročnosti.' },
-      { title: 'Implementace procesů', text: 'Automatizace nastavíme, napojíme na vaše nástroje a otestujeme v provozu.' },
+      { title: 'Zavedení automatizací', text: 'Automatizace nastavíme, napojíme na vaše nástroje a otestujeme v provozu.' },
       {
-        title: 'Firemní program',
-        text: 'Osm týdnů i déle: pravidelné schůzky, konzultace a úpravy automatizací podle toho, jak se osvědčují v provozu.',
+        title: 'Průběžná podpora',
+        text: 'Pravidelné schůzky, konzultace a úpravy automatizací podle toho, jak se osvědčují v provozu.',
       },
     ],
     outcomes: [
       { title: 'Plán na míru', text: 'Co zavést, v jakém pořadí a proč.' },
       { title: 'Tým, který AI umí', text: 'Sdílené postupy a pravidla místo pokusů každého zvlášť.' },
-      { title: 'Výsledky v provozu', text: 'Končíme u věcí, které běží a šetří čas, ne u prezentace.' },
+      { title: 'Výsledky v provozu', text: 'Automatizace a postupy, které běží v každodenní práci a šetří čas.' },
     ],
     faq: [
       { q: 'Musíme projít všemi kroky?', a: 'Ne. Každý krok lze objednat i samostatně, plán sestavíme podle potřeb vaší firmy.' },
       {
         q: 'Jak dlouho zavedení trvá?',
-        a: 'Od 8 týdnů po průběžnou spolupráci, třeba půl roku. Záleží na tom, co firma potřebuje.',
+        a: 'Celý program trvá nejméně 8 týdnů, od konzultace po průběžnou podporu. Podporu pak můžeme prodloužit, třeba na půl roku, podle toho, co firma potřebuje.',
       },
       {
         q: 'Co se během firemního programu děje?',
-        a: 'Pravidelně se potkáváme, konzultujeme a upravujeme automatizace podle toho, jak fungují v provozu, aby nové postupy ve firmě zůstaly.',
+        a: 'Projdeme kroky výše v pořadí, které vaší firmě dává smysl: konzultace, workshop, plán a zavedení automatizací. Pak se pravidelně potkáváme a upravujeme automatizace podle toho, jak fungují v provozu, aby nové postupy ve firmě zůstaly.',
       },
       {
         q: 'Kdo na tom pracuje?',

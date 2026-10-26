@@ -40,14 +40,14 @@ const action = formConfig.provider && !isNetlify ? formConfig.endpoint : undefin
     </div>
   </div>
   <div class="field">
-    <label for="f-message">Co vás nejvíc zdržuje?</label>
+    <label for="f-message">Co chcete ve firmě zlepšit?</label>
     <textarea
       id="f-message"
       class="input"
       name="message"
       rows="4"
       required
-      placeholder="Např. ruční zpracování faktur, odpovídání na stejné dotazy zákazníků…"></textarea>
+      placeholder="Např. školení týmu, ruční zpracování faktur, pravidla pro používání AI…"></textarea>
     <p class="error" id="f-message-error" hidden></p>
   </div>
   <!-- Spam trap: invisible to people, bots tend to fill it. Filled in = nothing is sent. -->
@@ -87,7 +87,7 @@ const action = formConfig.provider && !isNetlify ? formConfig.endpoint : undefin
     name: (v) => (v ? '' : 'Vyplňte prosím jméno.'),
     email: (v) =>
       !v ? 'Vyplňte prosím e-mail.' : EMAIL_RE.test(v) ? '' : 'Zadejte e-mail ve tvaru jmeno@firma.cz.',
-    message: (v) => (v ? '' : 'Napište nám prosím, co vás zdržuje.'),
+    message: (v) => (v ? '' : 'Napište nám prosím, s čím můžeme pomoct.'),
   };
 
   const form = document.querySelector<HTMLFormElement>('#lead-form')!;
