@@ -5,7 +5,6 @@
 
 ## Otevřená rozhodnutí
 - [ ] **Heslo před spuštěním.** Web je zamčený heslem (`gate` v `src/config.ts`, ukládá se jen SHA-256 hash). Ochrana je jen v prohlížeči – odradí návštěvníky a vyhledávače (`noindex`), ale zdrojový kód webu i repa je veřejný. Před spuštěním nastavit `gate.enabled = false`.
-- [x] **Formulář.** FormSubmit → info@markdo.cz (repository variables `PUBLIC_FORM_PROVIDER=custom`, `PUBLIC_FORM_ENDPOINT=https://formsubmit.co/ajax/info@markdo.cz`), aktivováno 26. 10. 2026.
+- [x] **Formulář.** FormSubmit → info@markdo.cz (repository variables `PUBLIC_FORM_PROVIDER=formsubmit`, `PUBLIC_FORM_ENDPOINT=https://formsubmit.co/ajax/info@markdo.cz`), aktivováno 26. 10. 2026.
 - [ ] **Analytika.** Zatím žádná (bez cookies). Pokud ano, zvážit cookieless (Plausible, Umami).
-- [ ] **Povinná pole.** Mockup je vizuálně neoznačuje; validace je hlídá. Zvážit hvězdičku / „(nepovinné)“ u Firmy.
 - [ ] **Astro verze.** Použito Astro 5 kvůli lokálnímu Node 20/22.23.2 (Astro 7 chce Node ≥ 22.23.4). `npm audit` hlásí zranitelnosti v Astru ≤ 7.3.1 (týkají se dev serveru / SSR, ne statického výstupu). Po aktualizaci Node přejít na Astro 7.

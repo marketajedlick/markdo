@@ -9,7 +9,7 @@ export interface Lead {
   message: string;
 }
 
-export type FormProvider = 'formspree' | 'netlify' | 'custom';
+export type FormProvider = 'formsubmit' | 'formspree' | 'netlify' | 'custom';
 
 export const NETLIFY_FORM_NAME = 'kontakt';
 
@@ -18,19 +18,31 @@ export const formConfig = {
   endpoint: import.meta.env.PUBLIC_FORM_ENDPOINT as string | undefined,
 };
 
-async function postJson(url: string, lead: Lead): Promise<void> {
+async function postJson(url: string, data: Lead | Record<string, string>): Promise<void> {
   const res = await fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-    body: JSON.stringify(lead),
+    body: JSON.stringify(data),
   });
   if (!res.ok) throw new Error(`Form endpoint responded ${res.status}`);
   // FormSubmit answers 200 with {"success": "false"} e.g. before the address is activated.
-  const data = await res.json().catch(() => null);
-  if (data && String(data.success) === 'false') throw new Error(`Form endpoint refused: ${data.message ?? ''}`);
+  const reply = await res.json().catch(() => null);
+  if (reply && String(reply.success) === 'false') throw new Error(`Form endpoint refused: ${reply.message ?? ''}`);
 }
 
 const adapters: Record<FormProvider, (lead: Lead) => Promise<void>> = {
+  // FormSubmit e-mails the keys as labels, so they are in Czech. _replyto makes "Reply" go to the visitor.
+  formsubmit: (lead) =>
+    postJson(requireEndpoint(), {
+      Jméno: lead.name,
+      Firma: lead.company || '–',
+      'E-mail': lead.email,
+      'Počet zaměstnanců': lead.size,
+      Zpráva: lead.message,
+      _subject: `Nová poptávka z markdo.cz: ${lead.name}`,
+      _replyto: lead.email,
+      _template: 'table',
+    }),
   formspree: (lead) => postJson(requireEndpoint(), lead),
   custom: (lead) => postJson(requireEndpoint(), lead),
   // Netlify Forms only works when the site is hosted on Netlify.
