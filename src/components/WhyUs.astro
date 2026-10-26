@@ -1,0 +1,59 @@
+---
+import SectionHeading from './SectionHeading.astro';
+
+const reasons = [
+  {
+    title: 'Technická hloubka',
+    text: 'Víme, co se děje pod kapotou: data, modely, integrace. Řešení stavíme tak, aby byla spolehlivá a bezpečná.',
+  },
+  {
+    title: 'Systémový design',
+    text: 'Proces navrhujeme celý, ne jen nástroj. Aby do sebe kroky zapadaly a tým je přijal.',
+  },
+  {
+    title: 'Výsledek místo prezentace',
+    text: 'Končíme u věcí, které běží a šetří čas. Ne u slajdů s doporučeními.',
+  },
+];
+---
+
+<section class="section why" aria-labelledby="proc-my-title">
+  <div class="container stack inner">
+    <SectionHeading
+      id="proc-my-title"
+      eyebrow="Proč my"
+      title="Technika, která funguje. Design, se kterým lidé chtějí pracovat."
+      class="why-heading"
+    />
+    <div class="grid">
+      {
+        reasons.map((reason) => (
+          <article class="card">
+            <h3 class="h3">{reason.title}</h3>
+            <p class="muted">{reason.text}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .why {
+    background: var(--bg-alt);
+  }
+
+  .inner {
+    gap: 48px;
+  }
+
+  .inner :global(.why-heading) {
+    max-width: 760px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+    gap: 20px;
+  }
+</style>

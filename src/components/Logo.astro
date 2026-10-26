@@ -1,0 +1,37 @@
+---
+import { site } from '../config';
+---
+
+<a href="#top" class="logo">
+  <span class="mark" aria-hidden="true"><span></span></span>
+  <span>{site.name}</span>
+</a>
+
+<style>
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 44px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 19px;
+    letter-spacing: -0.02em;
+  }
+
+  .mark {
+    width: 22px;
+    height: 22px;
+    border: 2px solid var(--accent);
+    border-radius: 5px;
+    display: grid;
+    place-items: center;
+  }
+
+  .mark span {
+    width: 8px;
+    height: 8px;
+    background: var(--accent);
+    border-radius: 2px;
+  }
+</style>

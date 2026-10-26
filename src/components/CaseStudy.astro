@@ -1,0 +1,70 @@
+---
+import SectionHeading from './SectionHeading.astro';
+
+const caseStudy = {
+  title: 'Automatická fakturace pro [typ firmy]',
+  client: '[Jedna věta o klientovi: obor, velikost, co dělá.]',
+  problem: '[Jak fakturace probíhala dřív a co bolelo.]',
+  solution: '[Co jsme nastavili a s jakými nástroji.]',
+  result: '[X h / měsíc]',
+  resultNote: '[ušetřeného času]',
+};
+---
+
+<section id="pripadovka" class="section" aria-labelledby="pripadovka-title">
+  <div class="container inner">
+    <SectionHeading id="pripadovka-title" eyebrow="Případovka" title={caseStudy.title} class="cs-heading">
+      <p class="muted">{caseStudy.client}</p>
+    </SectionHeading>
+    <div class="hairline-grid grid">
+      <div class="stack cell">
+        <span class="mono subtle label">Problém</span>
+        <p>{caseStudy.problem}</p>
+      </div>
+      <div class="stack cell">
+        <span class="mono subtle label">Řešení</span>
+        <p>{caseStudy.solution}</p>
+      </div>
+      <div class="stack cell">
+        <span class="mono subtle label">Výsledek</span>
+        <p class="result">{caseStudy.result}</p>
+        <p class="muted">{caseStudy.resultNote}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 48px;
+  }
+
+  .inner :global(.cs-heading) {
+    flex: 1 1 360px;
+    min-width: 0;
+  }
+
+  .grid {
+    flex: 1 1 520px;
+    min-width: 0;
+    grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+  }
+
+  .cell {
+    padding: 28px;
+    gap: 10px;
+  }
+
+  .label {
+    font-size: 15px;
+  }
+
+  .result {
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--accent);
+  }
+</style>

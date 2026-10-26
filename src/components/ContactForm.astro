@@ -1,0 +1,230 @@
+---
+import { site } from '../config';
+import { formConfig, NETLIFY_FORM_NAME } from '../lib/lead-form';
+
+const sizes = ['1–10', '11–50', '51–250', '250+'];
+const isNetlify = formConfig.provider === 'netlify';
+// Without JS the form still posts straight to the endpoint (Formspree / custom).
+const action = formConfig.provider && !isNetlify ? formConfig.endpoint : undefined;
+---
+
+<form
+  class="form"
+  id="lead-form"
+  name={NETLIFY_FORM_NAME}
+  method="post"
+  action={action}
+  data-netlify={isNetlify ? 'true' : undefined}
+>
+  <div class="row">
+    <div class="field">
+      <label for="f-name">Jméno</label>
+      <input id="f-name" class="input" type="text" name="name" autocomplete="name" required />
+      <p class="error" id="f-name-error" hidden></p>
+    </div>
+    <div class="field">
+      <label for="f-company">Firma</label>
+      <input id="f-company" class="input" type="text" name="company" autocomplete="organization" />
+    </div>
+    <div class="field">
+      <label for="f-email">E-mail</label>
+      <input id="f-email" class="input" type="email" name="email" autocomplete="email" required />
+      <p class="error" id="f-email-error" hidden></p>
+    </div>
+    <div class="field">
+      <label for="f-size">Počet zaměstnanců</label>
+      <select id="f-size" class="input" name="size">
+        {sizes.map((size) => <option>{size}</option>)}
+      </select>
+    </div>
+  </div>
+  <div class="field">
+    <label for="f-message">Co vás nejvíc zdržuje?</label>
+    <textarea
+      id="f-message"
+      class="input"
+      name="message"
+      rows="4"
+      required
+      placeholder="Např. ruční zpracování faktur, odpovídání na stejné dotazy zákazníků…"></textarea>
+    <p class="error" id="f-message-error" hidden></p>
+  </div>
+  <button type="submit" class="btn btn-primary submit">Odeslat a domluvit konzultaci</button>
+  <p class="status" role="status" aria-live="polite" hidden></p>
+  <p class="consent">
+    Odesláním souhlasíte se <a href={site.privacyUrl}>[zpracováním osobních údajů]</a>.
+  </p>
+</form>
+
+<template id="lead-form-messages">
+  <span data-key="success">Děkujeme, zpráva dorazila. Ozveme se {site.responseTime}.</span>
+  <span data-key="failure">Odeslání se nepodařilo. Zkuste to prosím znovu, nebo nám napište na {site.email}.</span>
+</template>
+
+<script>
+  import { submitLead, type Lead } from '../lib/lead-form';
+
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  // Returns the Czech error message for a field, or '' when it is valid.
+  const validators: Record<string, (value: string) => string> = {
+    name: (v) => (v ? '' : 'Vyplňte prosím jméno.'),
+    email: (v) =>
+      !v ? 'Vyplňte prosím e-mail.' : EMAIL_RE.test(v) ? '' : 'Zadejte e-mail ve tvaru jmeno@firma.cz.',
+    message: (v) => (v ? '' : 'Napište nám prosím, co vás zdržuje.'),
+  };
+
+  const form = document.querySelector<HTMLFormElement>('#lead-form')!;
+  const status = form.querySelector<HTMLElement>('.status')!;
+  const button = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+  const messages = document.querySelector<HTMLTemplateElement>('#lead-form-messages')!.content;
+  const message = (key: string) => messages.querySelector(`[data-key="${key}"]`)!.textContent!.trim();
+  let attempted = false;
+
+  form.noValidate = true;
+
+  function fieldValue(name: string): string {
+    return String(new FormData(form).get(name) ?? '').trim();
+  }
+
+  function validateField(name: string): boolean {
+    const input = form.elements.namedItem(name) as HTMLInputElement;
+    const error = form.querySelector<HTMLElement>(`#${input.id}-error`)!;
+    const text = validators[name](fieldValue(name));
+    error.textContent = text;
+    error.hidden = !text;
+    input.setAttribute('aria-invalid', String(Boolean(text)));
+    if (text) input.setAttribute('aria-describedby', error.id);
+    else input.removeAttribute('aria-describedby');
+    return !text;
+  }
+
+  function showStatus(kind: 'success' | 'failure') {
+    status.textContent = message(kind);
+    status.dataset.kind = kind;
+    status.hidden = false;
+  }
+
+  form.addEventListener('input', (event) => {
+    const name = (event.target as HTMLInputElement).name;
+    if (attempted && name in validators) validateField(name);
+  });
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    attempted = true;
+    status.hidden = true;
+
+    const results = Object.keys(validators).map((name) => [name, validateField(name)] as const);
+    const firstInvalid = results.find(([, ok]) => !ok);
+    if (firstInvalid) {
+      (form.elements.namedItem(firstInvalid[0]) as HTMLElement).focus();
+      return;
+    }
+
+    const lead: Lead = {
+      name: fieldValue('name'),
+      company: fieldValue('company'),
+      email: fieldValue('email'),
+      size: fieldValue('size'),
+      message: fieldValue('message'),
+    };
+
+    const label = button.textContent;
+    button.disabled = true;
+    button.textContent = 'Odesílám…';
+    try {
+      await submitLead(lead);
+      form.reset();
+      attempted = false;
+      showStatus('success');
+    } catch (err) {
+      console.error(err);
+      showStatus('failure');
+    } finally {
+      button.disabled = false;
+      button.textContent = label;
+    }
+  });
+</script>
+
+<style>
+  .form {
+    box-sizing: content-box; /* basis = content width, as in the mockup */
+    flex: 1 1 480px;
+    min-width: 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    padding: clamp(20px, 3vw, 36px);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+    gap: 18px;
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 16px;
+    color: var(--text-nav);
+  }
+
+  .input {
+    background: var(--bg);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    min-height: 46px;
+    color: var(--text);
+    font: inherit;
+    font-size: 16px;
+  }
+
+  textarea.input {
+    resize: vertical;
+  }
+
+  .input:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+
+  .input[aria-invalid='true'] {
+    border-color: var(--danger);
+  }
+
+  .error {
+    font-size: 15px;
+    color: var(--danger);
+  }
+
+  .submit:disabled {
+    cursor: progress;
+    opacity: 0.8;
+  }
+
+  .status {
+    padding: 12px 14px;
+    border-radius: var(--radius-sm);
+    font-size: 16px;
+    border: 1px solid var(--accent);
+    background: var(--white);
+  }
+
+  .status[data-kind='failure'] {
+    border-color: var(--danger);
+    color: var(--danger);
+  }
+
+  .consent {
+    font-size: 15px;
+    color: var(--text-subtle);
+  }
+</style>
