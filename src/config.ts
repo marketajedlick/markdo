@@ -16,3 +16,15 @@ export const site = {
 export function asset(path: string): string {
   return `${import.meta.env.BASE_URL.replace(/\/$/, '')}/${path.replace(/^\//, '')}`;
 }
+
+/**
+ * Pre-launch password gate. Set `enabled: false` to open the site to everyone.
+ * Client-side only (GitHub Pages is static): keeps casual visitors and search engines out,
+ * it is not access control – the page source is public.
+ */
+export const gate = {
+  enabled: true,
+  // SHA-256 of the password, so the password itself is not stored in the public repo.
+  // New hash: printf 'heslo' | shasum -a 256
+  passwordSha256: 'ae62fa1246520d267c016a2d1c68d1d4a1eacfd18e81cf5d68f801646b19f9c8',
+};

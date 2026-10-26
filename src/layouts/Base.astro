@@ -13,7 +13,9 @@ import '@fontsource/geist-mono/latin-ext-400.css';
 import '@fontsource/geist-mono/latin-500.css';
 import '@fontsource/geist-mono/latin-ext-500.css';
 import '../styles/global.css';
-import { site, asset } from '../config';
+import PasswordGate from '../components/PasswordGate.astro';
+import { site, asset, gate } from '../config';
+import { GATE_STORAGE_KEY } from '../lib/gate';
 
 interface Props {
   title?: string;
@@ -27,7 +29,7 @@ const ogImage = new URL(asset(site.ogImage), Astro.site);
 ---
 
 <!doctype html>
-<html lang="cs">
+<html lang="cs" class:list={{ locked: gate.enabled }}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -36,6 +38,17 @@ const ogImage = new URL(asset(site.ogImage), Astro.site);
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href={asset('favicon.svg')} />
     <meta name="theme-color" content="#EFE9DF" />
+    {gate.enabled && <meta name="robots" content="noindex, nofollow" />}
+    {
+      gate.enabled && (
+        // Runs before first paint, so returning visitors don't see the gate flash.
+        <script is:inline define:vars={{ hash: gate.passwordSha256, key: GATE_STORAGE_KEY }}>
+          try {
+            if (localStorage.getItem(key) === hash) document.documentElement.classList.remove('locked');
+          } catch {}
+        </script>
+      )
+    }
 
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="cs_CZ" />
@@ -49,6 +62,7 @@ const ogImage = new URL(asset(site.ogImage), Astro.site);
     <meta name="twitter:card" content="summary_large_image" />
   </head>
   <body>
+    {gate.enabled && <PasswordGate />}
     <slot />
   </body>
 </html>
