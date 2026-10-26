@@ -120,7 +120,7 @@ const others = services.filter((s) => s.slug !== service.slug);
           {
             others.map((s) => (
               <a class="card other" href={`${home}${s.slug}/`}>
-                <span class="eyebrow">{s.eyebrow}</span>
+                {s.eyebrow !== s.name && <span class="eyebrow">{s.eyebrow}</span>}
                 <span class="h3">{s.name}</span>
                 <span class="muted">{s.meta.description}</span>
               </a>

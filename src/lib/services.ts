@@ -28,10 +28,15 @@ const faqPlace = {
   a: 'Podle toho, co vám vyhovuje. V Praze přijedeme za vámi do firmy, mimo Prahu pracujeme online, celodenní školení i jinde po domluvě. Úvodní konzultace probíhá online.',
 };
 
+const dataAnswer = 'Nastavení přizpůsobíme požadavkům vaší firmy a citlivosti dat: které nástroje, jaká data a za jakých podmínek.';
+
 const faqData = {
   q: 'Je to bezpečné pro naše data?',
-  a: 'Nastavení přizpůsobíme požadavkům vaší firmy a citlivosti dat: které nástroje, jaká data a za jakých podmínek. Možnosti mapujeme poctivě, i kdyby z úvodní konzultace vyšlo, že AI pro vás teď není.',
+  a: `${dataAnswer} Možnosti mapujeme poctivě, i kdyby z úvodní konzultace vyšlo, že AI pro vás teď není.`,
 };
+
+// For pages that already answer "what if AI is not for us" separately.
+const faqDataShort = { q: faqData.q, a: dataAnswer };
 
 export const services: Service[] = [
   {
@@ -95,7 +100,7 @@ export const services: Service[] = [
     slug: 'plan-ai-integrace',
     name: 'Plán AI integrace',
     meta: {
-      title: 'Plán AI integrace – AI audit a priority pro vaši firmu | MarkDo',
+      title: 'Plán AI integrace – AI audit pro vaši firmu | MarkDo',
       description:
         'AI audit pro malé a střední firmy: za zhruba 2 týdny zmapujeme procesy a seřadíme příležitosti podle přínosu a náročnosti. Plán na míru, co zavést nejdřív.',
     },
@@ -139,7 +144,7 @@ export const services: Service[] = [
         q: 'Musíme pak automatizaci realizovat s vámi?',
         a: 'Ne. Každý krok lze objednat i samostatně, plán je váš.',
       },
-      faqData,
+      faqDataShort,
       faqPrice,
     ],
   },
@@ -147,7 +152,7 @@ export const services: Service[] = [
     slug: 'automatizace-procesu',
     name: 'Automatizace procesů',
     meta: {
-      title: 'Automatizace procesů s AI – faktury, objednávky, dokumenty | MarkDo',
+      title: 'Automatizace procesů s AI – faktury a dokumenty | MarkDo',
       description:
         'Automatizujeme opakovanou práci s fakturami, objednávkami a dokumenty. AI vytěží údaje, člověk jen zkontroluje. Napojíme na nástroje, které už používáte.',
     },
@@ -204,7 +209,7 @@ export const services: Service[] = [
     slug: 'zavedeni-ai-do-firmy',
     name: 'Zavedení AI do firmy',
     meta: {
-      title: 'Zavedení AI do firmy – AI konzultace a firemní program | MarkDo',
+      title: 'Zavedení AI do firmy – AI konzultace a program | MarkDo',
       description:
         'Provedeme malou nebo střední firmu zavedením AI od konzultace zdarma po fungující procesy: plán na míru, školení týmu, automatizace a průběžná podpora.',
     },
