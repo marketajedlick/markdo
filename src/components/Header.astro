@@ -1,5 +1,6 @@
 ---
 import Logo from './Logo.astro';
+import { services } from '../lib/services';
 
 interface Props {
   /** Homepage URL to prefix the section anchors with; empty on the homepage itself. */
@@ -7,8 +8,10 @@ interface Props {
 }
 
 const { home = '' } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const serviceLinks = services.map((s) => ({ href: `${base}${s.slug}/`, label: s.name }));
+const process = { href: `${home}#proces`, label: 'Jak spolupráce probíhá' };
 const links = [
-  { href: `${home}#proces`, label: 'Jak pracujeme' },
   { href: `${home}#pripadovka`, label: 'Případovka' },
   { href: `${home}#tym`, label: 'Kdo jsme' },
 ];
@@ -18,19 +21,70 @@ const links = [
   <div class="container inner">
     <Logo href={`${home}#top`} />
     <nav class="links" aria-label="Hlavní navigace">
+      <details class="dropdown">
+        <summary>Služby <span class="caret" aria-hidden="true"></span></summary>
+        <ul class="dropdown-list">
+          {serviceLinks.map((link) => <li><a href={link.href}>{link.label}</a></li>)}
+          <li class="separated"><a href={process.href}>{process.label}</a></li>
+        </ul>
+      </details>
       {links.map((link) => <a href={link.href}>{link.label}</a>)}
     </nav>
-    <a href={`${home}#kontakt`} class="btn btn-primary cta">Konzultace zdarma</a>
+    <div class="end">
+      <a href={`${home}#kontakt`} class="btn btn-primary cta">Konzultace<span class="cta-extra">&nbsp;zdarma</span></a>
+      <!-- Below 820 px the links move into this menu. -->
+      <details class="mobile-menu">
+        <summary aria-label="Menu">
+          <span class="burger" aria-hidden="true"><span></span></span>
+        </summary>
+        <nav class="panel" aria-label="Menu">
+          <p class="mono subtle panel-label">Služby</p>
+          <ul>
+            {serviceLinks.map((link) => <li><a href={link.href}>{link.label}</a></li>)}
+          </ul>
+          <ul class="separated">
+            <li><a href={process.href}>{process.label}</a></li>
+            {links.map((link) => <li><a href={link.href}>{link.label}</a></li>)}
+          </ul>
+        </nav>
+      </details>
+    </div>
   </div>
 </header>
 
+<script>
+  // Menus close on a click outside, on Escape and after following a link (same-page anchors).
+  const menus = document.querySelectorAll<HTMLDetailsElement>('.header details');
+  const closeAll = (except?: Element) => menus.forEach((m) => m !== except && (m.open = false));
+
+  document.addEventListener('click', (event) => {
+    const target = event.target as Element;
+    const menu = target.closest('.header details');
+    if (target.closest('.header details a')) closeAll();
+    else closeAll(menu ?? undefined);
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') return;
+    const open = [...menus].find((m) => m.open);
+    if (!open) return;
+    open.open = false;
+    open.querySelector('summary')!.focus();
+  });
+</script>
+
 <style>
+  /* Stays on screen, so the consultation button is always one tap away on the long page. */
   .header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--bg);
     border-bottom: 1px solid var(--line);
   }
 
   .inner {
-    padding-block: 18px;
+    padding-block: 12px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -39,20 +93,97 @@ const links = [
 
   .links {
     display: flex;
+    align-items: center;
     gap: 32px;
     font-size: 17px;
   }
 
-  .links a {
+  .links > a,
+  .dropdown summary {
     display: inline-flex;
     align-items: center;
+    gap: 6px;
     min-height: 44px;
     text-decoration: none;
     color: var(--text-nav);
+    cursor: pointer;
   }
 
-  .links a:hover {
+  .links > a:hover,
+  .dropdown summary:hover {
     color: var(--accent);
+  }
+
+  summary {
+    list-style: none;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .caret {
+    width: 7px;
+    height: 7px;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: translateY(-2px) rotate(45deg);
+  }
+
+  .dropdown[open] .caret {
+    transform: translateY(2px) rotate(-135deg);
+  }
+
+  .dropdown {
+    position: relative;
+  }
+
+  .dropdown-list,
+  .panel ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .dropdown-list {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: -16px;
+    min-width: 260px;
+    padding: 8px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 16px 40px rgb(22 23 26 / 0.12);
+  }
+
+  .dropdown-list a,
+  .panel a {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 6px 10px;
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    color: var(--text);
+  }
+
+  .dropdown-list a:hover,
+  .panel a:hover {
+    background: var(--bg);
+    color: var(--accent);
+  }
+
+  .separated {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid var(--line);
+  }
+
+  .end {
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
 
   .cta {
@@ -63,13 +194,89 @@ const links = [
     white-space: nowrap;
   }
 
+  .mobile-menu {
+    display: none;
+  }
+
+  .mobile-menu summary {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+  }
+
+  /* Three bars (the span and its two pseudo-elements), a cross when open. */
+  .burger span,
+  .burger span::before,
+  .burger span::after {
+    display: block;
+    width: 18px;
+    height: 1.5px;
+    background: var(--text);
+  }
+
+  .burger span {
+    position: relative;
+  }
+
+  .burger span::before,
+  .burger span::after {
+    content: '';
+    position: absolute;
+    left: 0;
+  }
+
+  .burger span::before {
+    top: -5px;
+  }
+
+  .burger span::after {
+    top: 5px;
+  }
+
+  .mobile-menu[open] .burger span {
+    background: transparent;
+  }
+
+  .mobile-menu[open] .burger span::before {
+    transform: translateY(5px) rotate(45deg);
+  }
+
+  .mobile-menu[open] .burger span::after {
+    transform: translateY(-5px) rotate(-45deg);
+  }
+
+  .panel {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    padding: 16px var(--gutter) 24px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+    box-shadow: 0 24px 40px rgb(22 23 26 / 0.12);
+    font-size: 18px;
+  }
+
+  .panel-label {
+    font-size: 15px;
+    padding: 0 10px 4px;
+  }
+
   @media (max-width: 820px) {
     .links {
       display: none;
     }
+
+    .mobile-menu {
+      display: block;
+    }
   }
 
-  /* Smallest phones (320 px): logo and CTA must fit side by side. */
+  /* Small phones: logo, CTA and menu must fit side by side. */
   @media (max-width: 400px) {
     .inner {
       gap: 12px;
@@ -77,7 +284,13 @@ const links = [
 
     .cta {
       font-size: 15px;
-      padding: 10px 14px;
+      padding: 10px 12px;
+    }
+  }
+
+  @media (max-width: 360px) {
+    .cta-extra {
+      display: none;
     }
   }
 </style>

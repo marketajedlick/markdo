@@ -179,7 +179,7 @@ export const services: Service[] = [
       { title: 'Fungující automatizace', text: 'Napojená na nástroje, které už používáte.' },
       { title: 'Tým, který ji umí spravovat', text: 'Školení ke správě, takže na nás nejste závislí.' },
     ],
-    proof: { label: 'Příklad: faktury ve filmové produkci', value: 'cca 60 h / rok', note: 'ušetřeného času účetní, realizace 1 h' },
+    proof: { label: 'Příklad: faktury ve filmové produkci', value: '60 h ročně', note: 'ušetřeného času účetní, nastavení za hodinu' },
     faq: [
       {
         q: 'Jaké procesy se dají automatizovat?',
@@ -224,8 +224,8 @@ export const services: Service[] = [
     ],
     steps: [
       { title: 'Konzultace zdarma', text: 'Online. Probereme, jak firma funguje a kde ztrácí čas. Bez závazků.' },
-      { title: 'Workshop pro tým', text: 'Prakticky na vašich úkolech a datech. Tým odchází s postupy, které druhý den použije.' },
       { title: 'Plán AI integrace', text: 'Zmapujeme procesy a seřadíme příležitosti podle přínosu a náročnosti.' },
+      { title: 'Workshop pro tým', text: 'Prakticky na vašich úkolech a datech. Tým odchází s postupy, které druhý den použije.' },
       { title: 'Implementace procesů', text: 'Automatizace nastavíme, napojíme na vaše nástroje a otestujeme v provozu.' },
       {
         title: 'Firemní program',
