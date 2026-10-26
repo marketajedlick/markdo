@@ -26,7 +26,13 @@ const members = [
 
 <section id="tym" class="section" aria-labelledby="tym-title">
   <div class="container stack inner">
-    <SectionHeading id="tym-title" eyebrow="Kdo jsme" title="Inženýrka a designér" />
+    <SectionHeading id="tym-title" eyebrow="Kdo jsme" title="Inženýrka a designér">
+      <p class="mono name-origin">
+        <span class="hl">MarkDo</span> = <span class="hl">Mark</span>éta + <span
+          class="hl">Do</span
+        >do
+      </p>
+    </SectionHeading>
     <div class="grid">
       {members.map((member) => <TeamCard {...member} />)}
     </div>
@@ -36,6 +42,15 @@ const members = [
 <style>
   .inner {
     gap: 48px;
+  }
+
+  .name-origin {
+    font-size: 18px;
+    color: var(--text-muted);
+  }
+
+  .name-origin .hl {
+    color: var(--accent);
   }
 
   .grid {
