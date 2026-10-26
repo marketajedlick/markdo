@@ -1,4 +1,4 @@
-// Site-wide content that is still open. Values in [brackets] are placeholders – see TODO.md.
+// Site-wide content: name, contacts, analytics.
 export const site = {
   name: 'MarkDo',
   title: 'MarkDo – AI pro firmy: zavedení, školení a automatizace',
