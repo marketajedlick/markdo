@@ -10,6 +10,7 @@
 - [ ] OG obrázek – zatím `public/og-placeholder.png` (1200×630, jen logo), nahradit finálním
 
 ## Otevřená rozhodnutí
+- [ ] **Heslo před spuštěním.** Web je zamčený heslem (`gate` v `src/config.ts`, ukládá se jen SHA-256 hash). Ochrana je jen v prohlížeči – odradí návštěvníky a vyhledávače (`noindex`), ale zdrojový kód webu i repa je veřejný. Před spuštěním nastavit `gate.enabled = false`.
 - [ ] **Backend formuláře.** Adaptér je v `src/lib/lead-form.ts`, volí se proměnnými `PUBLIC_FORM_PROVIDER` a `PUBLIC_FORM_ENDPOINT` (viz `.env.example`). Na GitHub Pages: Formspree nebo vlastní endpoint; nastavit jako *Repository variables* v GitHubu. Netlify Forms funguje jen při hostingu na Netlify. Dokud není nastaveno, formulář na produkci ukáže chybovou hlášku.
 - [ ] **Doména www.markdo.cz.** V GitHub Pages nastavená. Zbývá DNS u Váš-hosting (CNAME `www` → `marketajedlick.github.io`, A/AAAA pro `markdo.cz` na GitHub Pages), ověření domény v GitHubu (TXT) a po vydání certifikátu zapnout *Enforce HTTPS*. MX záznamy nechat beze změny.
 - [ ] **Analytika.** Zatím žádná (bez cookies). Pokud ano, zvážit cookieless (Plausible, Umami).

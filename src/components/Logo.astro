@@ -1,11 +1,19 @@
 ---
 import { site } from '../config';
+
+interface Props {
+  /** Render as a link to the top of the page (default) or as plain text. */
+  link?: boolean;
+}
+
+const { link = true } = Astro.props;
+const Tag = link ? 'a' : 'span';
 ---
 
-<a href="#top" class="logo">
+<Tag href={link ? '#top' : undefined} class="logo">
   <span class="mark" aria-hidden="true"><span></span></span>
   <span>{site.name}</span>
-</a>
+</Tag>
 
 <style>
   .logo {
