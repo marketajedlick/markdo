@@ -2,7 +2,6 @@
 
 ## Placeholdery v textu (`[takhle]`)
 - [ ] Hero vizuál: `[X h týdně]`, `[Y min]` – `src/components/FlowVisual.astro`
-- [ ] Firemní program: `[X týdnů]` – `src/components/Process.astro`
 - [ ] Případovka: typ firmy, věta o klientovi, problém, řešení, výsledek `[X h / měsíc]` – `src/components/CaseStudy.astro`
 - [ ] Doplnění bia Markéty – `src/components/Team.astro`
 - [ ] Lhůta odpovědi `[do X pracovních dnů]`, e-mail, LinkedIn, odkaz na GDPR – `src/config.ts`
