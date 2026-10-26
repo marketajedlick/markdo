@@ -12,7 +12,7 @@ export const site = {
   responseTime: '[do X pracovních dnů]',
 };
 
-/** Prefixes a path inside /public with the deploy base (e.g. "/markdo/" on GitHub Pages). */
+/** Prefixes a path inside /public with the deploy base (e.g. "/markdo/" when served from <user>.github.io/<repo>/). */
 export function asset(path: string): string {
   return `${import.meta.env.BASE_URL.replace(/\/$/, '')}/${path.replace(/^\//, '')}`;
 }
