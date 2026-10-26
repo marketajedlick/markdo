@@ -49,6 +49,8 @@ const action = formConfig.provider && !isNetlify ? formConfig.endpoint : undefin
       placeholder="Např. ruční zpracování faktur, odpovídání na stejné dotazy zákazníků…"></textarea>
     <p class="error" id="f-message-error" hidden></p>
   </div>
+  <!-- Spam trap: hidden from people, bots fill it in. "_honey" is FormSubmit's name for it (used when posting without JS). -->
+  <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none" />
   <button type="submit" class="btn btn-primary submit">Odeslat a domluvit konzultaci</button>
   <p class="status" role="status" aria-live="polite" hidden></p>
   <p class="consent">
@@ -119,6 +121,13 @@ const action = formConfig.provider && !isNetlify ? formConfig.endpoint : undefin
     const firstInvalid = results.find(([, ok]) => !ok);
     if (firstInvalid) {
       (form.elements.namedItem(firstInvalid[0]) as HTMLElement).focus();
+      return;
+    }
+
+    // A filled spam trap means a bot: look successful, send nothing.
+    if (fieldValue('_honey')) {
+      form.reset();
+      showStatus('success');
       return;
     }
 

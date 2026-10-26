@@ -1,0 +1,37 @@
+---
+import { site, asset } from '../config';
+
+// schema.org data for Google: who runs the site and what it is about (shown in search, knowledge panel).
+const home = new URL(asset(''), Astro.site).href;
+const data = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': `${home}#organization`,
+      name: site.name,
+      url: home,
+      logo: new URL(asset('favicon.svg'), Astro.site).href,
+      image: new URL(asset(site.ogImage), Astro.site).href,
+      description: site.description,
+      email: site.email,
+      areaServed: { '@type': 'Country', name: 'Česko' },
+      knowsAbout: ['umělá inteligence', 'zavádění AI do firem', 'automatizace procesů', 'AI školení pro firmy'],
+      founder: [
+        { '@type': 'Person', name: 'Markéta Jedličková', jobTitle: 'Data & AI inženýrka', sameAs: site.linkedin[0].href },
+        { '@type': 'Person', name: 'Dodo Dobrik', jobTitle: 'Systémový designér', sameAs: site.linkedin[1].href },
+      ],
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${home}#website`,
+      url: home,
+      name: site.name,
+      inLanguage: 'cs',
+      publisher: { '@id': `${home}#organization` },
+    },
+  ],
+};
+---
+
+<script is:inline type="application/ld+json" set:html={JSON.stringify(data)} />
