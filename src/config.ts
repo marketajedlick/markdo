@@ -7,9 +7,11 @@ export const site = {
   ogImage: 'og-placeholder.png',
   email: '[e-mail]',
   emailHref: 'mailto:[email]',
-  linkedin: 'https://www.linkedin.com',
-  privacyUrl: '#',
-  responseTime: '[do X pracovních dnů]',
+  linkedin: [
+    { label: 'LinkedIn Markéta', href: 'https://www.linkedin.com/in/marketajedlickova/' },
+    { label: 'LinkedIn Dodo', href: 'https://www.linkedin.com/in/dodo-dobrik/' },
+  ],
+  privacyUrl: `${import.meta.env.BASE_URL.replace(/\/$/, '')}/osobni-udaje/`,
 };
 
 /** Prefixes a path inside /public with the deploy base (e.g. "/markdo/" when served from <user>.github.io/<repo>/). */

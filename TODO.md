@@ -1,10 +1,10 @@
 # TODO – MarkDo web
 
 ## Placeholdery v textu (`[takhle]`)
-- [ ] Hero vizuál: `[X h týdně]`, `[Y min]` – `src/components/FlowVisual.astro`
 - [ ] Případovka: typ firmy, věta o klientovi, problém, řešení, výsledek `[X h / měsíc]` – `src/components/CaseStudy.astro`
 - [ ] Doplnění bia Markéty – `src/components/Team.astro`
-- [ ] Lhůta odpovědi `[do X pracovních dnů]`, e-mail, LinkedIn, odkaz na GDPR – `src/config.ts`
+- [ ] E-mail – `src/config.ts`
+- [ ] Zásady osobních údajů (`src/pages/osobni-udaje.astro`): doplnit správce (jméno/firma, IČO, adresa), dobu uchování `[12 měsíců]`, službu pro formulář a poskytovatele e-mailu. Ideálně nechat zkontrolovat.
 - [ ] OG obrázek – zatím `public/og-placeholder.png` (1200×630, jen logo), nahradit finálním
 
 ## Otevřená rozhodnutí

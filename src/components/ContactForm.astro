@@ -52,12 +52,12 @@ const action = formConfig.provider && !isNetlify ? formConfig.endpoint : undefin
   <button type="submit" class="btn btn-primary submit">Odeslat a domluvit konzultaci</button>
   <p class="status" role="status" aria-live="polite" hidden></p>
   <p class="consent">
-    Odesláním souhlasíte se <a href={site.privacyUrl}>[zpracováním osobních údajů]</a>.
+    Jak nakládáme s vašimi údaji, popisujeme v <a href={site.privacyUrl}>zásadách zpracování osobních údajů</a>.
   </p>
 </form>
 
 <template id="lead-form-messages">
-  <span data-key="success">Děkujeme, zpráva dorazila. Ozveme se {site.responseTime}.</span>
+  <span data-key="success">Děkujeme, zpráva dorazila. Brzy se vám ozveme.</span>
   <span data-key="failure">Odeslání se nepodařilo. Zkuste to prosím znovu, nebo nám napište na {site.email}.</span>
 </template>
 
