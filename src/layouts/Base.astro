@@ -21,7 +21,7 @@ interface Props {
 }
 
 const { title = site.title, description = site.description } = Astro.props;
-// GitHub Pages serves directories with a trailing slash ("/markdo2/").
+// GitHub Pages serves directories with a trailing slash ("/markdo/").
 const canonical = new URL(Astro.url.pathname.replace(/\/?$/, '/'), Astro.site);
 const ogImage = new URL(asset(site.ogImage), Astro.site);
 ---

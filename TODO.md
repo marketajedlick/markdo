@@ -11,7 +11,7 @@
 
 ## Otevřená rozhodnutí
 - [ ] **Backend formuláře.** Adaptér je v `src/lib/lead-form.ts`, volí se proměnnými `PUBLIC_FORM_PROVIDER` a `PUBLIC_FORM_ENDPOINT` (viz `.env.example`). Na GitHub Pages: Formspree nebo vlastní endpoint; nastavit jako *Repository variables* v GitHubu. Netlify Forms funguje jen při hostingu na Netlify. Dokud není nastaveno, formulář na produkci ukáže chybovou hlášku.
-- [ ] **Doména.** Teď `https://marketajedlick.github.io/markdo2/`. Vlastní doménu nastavit v Settings → Pages; base path se přizpůsobí automaticky.
+- [ ] **Doména.** Teď `https://marketajedlick.github.io/markdo/`. Vlastní doménu nastavit v Settings → Pages; base path se přizpůsobí automaticky.
 - [ ] **Hosting.** Repo je soukromé – GitHub Pages pro soukromé repo vyžaduje placený plán (Pro/Team), jinak repo zveřejnit.
 - [ ] **Analytika.** Zatím žádná (bez cookies). Pokud ano, zvážit cookieless (Plausible, Umami).
 - [ ] **Povinná pole.** Mockup je vizuálně neoznačuje; validace je hlídá. Zvážit hvězdičku / „(nepovinné)“ u Firmy.
