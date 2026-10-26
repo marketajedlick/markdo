@@ -85,7 +85,6 @@ const action = formConfig.provider && !isNetlify ? formConfig.endpoint : undefin
 
   const form = document.querySelector<HTMLFormElement>('#lead-form')!;
   const status = form.querySelector<HTMLElement>('.status')!;
-  const button = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
   const messages = document.querySelector<HTMLTemplateElement>('#lead-form-messages')!.content;
   const message = (key: string) => messages.querySelector(`[data-key="${key}"]`)!.textContent!.trim();
   let attempted = false;
@@ -146,22 +145,23 @@ const action = formConfig.provider && !isNetlify ? formConfig.endpoint : undefin
       message: fieldValue('message'),
     };
 
-    const label = button.textContent;
-    button.disabled = true;
-    button.textContent = 'Odesílám…';
-    try {
-      await submitLead(lead);
-      form.reset();
-      attempted = false;
-      showStatus('success');
-    } catch (err) {
+    // Optimistic: thank the visitor right away and send in the background (the services take
+    // seconds). If sending fails while they are still here, say so and give their text back.
+    form.reset();
+    attempted = false;
+    showStatus('success');
+    submitLead(lead).catch((err) => {
       console.error(err);
+      restore(lead);
       showStatus('failure');
-    } finally {
-      button.disabled = false;
-      button.textContent = label;
-    }
+    });
   });
+
+  function restore(lead: Lead) {
+    for (const [name, value] of Object.entries(lead)) {
+      (form.elements.namedItem(name) as HTMLInputElement).value = value;
+    }
+  }
 </script>
 
 <style>
@@ -219,11 +219,6 @@ const action = formConfig.provider && !isNetlify ? formConfig.endpoint : undefin
   .error {
     font-size: 15px;
     color: var(--danger);
-  }
-
-  .submit:disabled {
-    cursor: progress;
-    opacity: 0.8;
   }
 
   .status {
