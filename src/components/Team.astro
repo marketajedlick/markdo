@@ -2,19 +2,21 @@
 import SectionHeading from './SectionHeading.astro';
 import TeamCard from './TeamCard.astro';
 
-// Once photos exist, add them to /public/team/ and set `photo: 'team/marketa.jpg'` etc.
+// Photos live in /public/team/ at 320×400 (2× the 160×200 slot).
 const members = [
   {
     name: 'Markéta Jedličková',
     role: 'Data & AI inženýrka',
     bio: 'Navrhuje a staví datová a AI řešení v CRUXO. Pořádá TEDxPrague. [Doplnit 1–2 věty o zkušenostech s firmami.]',
-    photoAlt: 'Místo pro fotku Markéty',
+    photo: 'team/marketa.jpg',
+    photoAlt: 'Markéta Jedličková',
   },
   {
     name: 'Dodo Dobrik',
     role: 'Systémový designér',
     bio: '[Bio: zaměření, zkušenosti, pro koho navrhoval.]',
-    photoAlt: 'Místo pro fotku Doda',
+    photo: 'team/dodo.jpg',
+    photoAlt: 'Dodo Dobrik',
   },
 ];
 ---
