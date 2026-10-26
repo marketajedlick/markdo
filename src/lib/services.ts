@@ -182,7 +182,7 @@ export const services: Service[] = [
       { title: 'Fungující automatizace', text: 'Napojená na nástroje, které už používáte.' },
       { title: 'Tým, který ji umí spravovat', text: 'Školení ke správě, takže na nás nejste závislí.' },
     ],
-    proof: { label: 'Příklad: faktury ve filmové produkci', value: 'cca 60 h / rok', note: 'ušetřeného času účetní, nastavení za 1 h' },
+    proof: { label: 'Příklad: faktury ve filmové produkci', value: '60 h ročně', note: 'ušetřeného času účetní, nastavení za hodinu' },
     faq: [
       {
         q: 'Jaké procesy se dají automatizovat?',
@@ -227,8 +227,8 @@ export const services: Service[] = [
     ],
     steps: [
       { title: 'Konzultace zdarma', text: 'Online. Probereme, jak firma funguje a kde ztrácí čas. Bez závazků.' },
-      { title: 'Workshop pro tým', text: 'Prakticky na vašich úkolech a datech. Každý si postupy vyzkouší na vlastní práci.' },
       { title: 'Plán AI integrace', text: 'Zmapujeme procesy a seřadíme příležitosti podle přínosu a náročnosti.' },
+      { title: 'Workshop pro tým', text: 'Prakticky na vašich úkolech a datech. Každý si postupy vyzkouší na vlastní práci.' },
       { title: 'Zavedení automatizací', text: 'Automatizace nastavíme, napojíme na vaše nástroje a otestujeme v provozu.' },
       {
         title: 'Průběžná podpora',
@@ -248,7 +248,7 @@ export const services: Service[] = [
       },
       {
         q: 'Co se během firemního programu děje?',
-        a: 'Projdeme kroky výše v pořadí, které vaší firmě dává smysl: konzultace, workshop, plán a zavedení automatizací. Pak se pravidelně potkáváme a upravujeme automatizace podle toho, jak fungují v provozu, aby nové postupy ve firmě zůstaly.',
+        a: 'Projdeme kroky výše v pořadí, které vaší firmě dává smysl: konzultace, plán, workshop a zavedení automatizací. Pak se pravidelně potkáváme a upravujeme automatizace podle toho, jak fungují v provozu, aby nové postupy ve firmě zůstaly.',
       },
       {
         q: 'Kdo na tom pracuje?',

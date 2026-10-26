@@ -3,16 +3,16 @@ import SectionHeading from './SectionHeading.astro';
 
 const reasons = [
   {
-    title: 'Technická hloubka',
-    text: 'Víme, co se děje pod kapotou: data, modely, integrace. Řešení stavíme tak, aby byla spolehlivá a bezpečná.',
-  },
-  {
-    title: 'Systémový design',
-    text: 'Proces navrhujeme celý, ne jen nástroj. Aby do sebe kroky zapadaly a tým je přijal.',
+    title: 'Nejdřív procesy, pak nástroje',
+    text: 'Díváme se, jak firma opravdu pracuje. Nástroj vybíráme až podle toho, nejsme vázaní na žádný.',
   },
   {
     title: 'Řešení v provozu',
     text: 'Automatizaci předáváme, až když běží na vašich datech a tým s ní umí pracovat.',
+  },
+  {
+    title: 'Know-how zůstává u vás',
+    text: 'Tým naučíme automatizace spravovat a upravovat, takže na nás nejste závislí.',
   },
 ];
 ---
@@ -22,9 +22,11 @@ const reasons = [
     <SectionHeading
       id="proc-my-title"
       eyebrow="Proč my"
-      title="Technika, která funguje. Design, se kterým lidé chtějí pracovat."
+      title="Když pro vás AI teď není, řekneme vám to rovnou."
       class="why-heading"
-    />
+    >
+      <p class="muted">Možnosti mapujeme poctivě. Co se vaší firmě nevyplatí, vám neprodáme.</p>
+    </SectionHeading>
     <div class="grid">
       {
         reasons.map((reason) => (

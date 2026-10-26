@@ -15,6 +15,9 @@ import HeroIllustration from './HeroIllustration.astro';
         <a href="#kontakt" class="btn btn-primary">Domluvit konzultaci zdarma</a>
         <a href="#proces" class="btn btn-ghost">Jak to probíhá</a>
       </div>
+      <a href="#pripadovka" class="proof">
+        <span class="proof-value">60 h ročně</span> ušetřila účetní filmové produkce na fakturách →
+      </a>
     </div>
     <HeroIllustration />
   </div>
@@ -58,6 +61,22 @@ import HeroIllustration from './HeroIllustration.astro';
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
+  }
+
+  .proof {
+    font-size: 17px;
+    color: var(--text-muted);
+    text-decoration: none;
+    text-wrap: pretty;
+  }
+
+  .proof:hover {
+    color: var(--accent);
+  }
+
+  .proof-value {
+    font-weight: 600;
+    color: var(--accent);
   }
 
   /* Mobile: short standalone blocks centred (long text stays left-aligned). */
