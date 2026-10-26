@@ -7,6 +7,8 @@ export interface Lead {
   email: string;
   size: string;
   message: string;
+  /** Filled the spam trap or sent suspiciously fast. Still delivered, marked in the subject. */
+  suspect?: boolean;
 }
 
 export type FormProvider = 'web3forms' | 'formsubmit' | 'formspree' | 'netlify' | 'custom';
@@ -63,12 +65,12 @@ function czechFields(lead: Lead) {
     Jméno: lead.name,
     Firma: lead.company || '–',
     'E-mail': lead.email,
-    'Počet zaměstnanců': lead.size,
+    'Počet zaměstnanců': lead.size || '–',
     Zpráva: lead.message,
   };
 }
 
-const subject = (lead: Lead) => `Nová poptávka z markdo.cz: ${lead.name}`;
+const subject = (lead: Lead) => `${lead.suspect ? '[Možná spam] ' : ''}Nová poptávka z markdo.cz: ${lead.name}`;
 
 const adapters: Record<FormProvider, (lead: Lead) => Promise<void>> = {
   web3forms: (lead) => {
@@ -91,9 +93,9 @@ const adapters: Record<FormProvider, (lead: Lead) => Promise<void>> = {
     }),
   formspree: (lead) => postJson(requireEndpoint(), lead),
   custom: (lead) => postJson(requireEndpoint(), lead),
-  // Netlify Forms only works when the site is hosted on Netlify.
-  netlify: async (lead) => {
-    const body = new URLSearchParams({ 'form-name': NETLIFY_FORM_NAME, ...lead });
+  // Netlify Forms only works when the site is hosted on Netlify. It filters spam itself, so no suspect flag.
+  netlify: async ({ suspect: _, ...fields }) => {
+    const body = new URLSearchParams({ 'form-name': NETLIFY_FORM_NAME, ...fields });
     const res = await fetch('/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
