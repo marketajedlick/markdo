@@ -3,7 +3,7 @@
 ## Placeholdery v textu (`[takhle]`)
 - [ ] Zásady osobních údajů (`src/pages/osobni-udaje.astro`): hotové, ideálně nechat jednou zkontrolovat.
 
-- [ ] Podstránky služeb (`src/lib/services.ts`): doplnit délku workshopu, počet účastníků, délku přípravy plánu, podporované nástroje a typickou délku celé spolupráce; pak sloučit PR a stránky nasadit.
+- [ ] Podstránky služeb (`src/lib/services.ts`): texty doplněné, zkontrolovat a nasadit (PR #31), pak poslat do Search Console.
 
 ## Otevřená rozhodnutí
 - [x] **Heslo před spuštěním.** Vypnuto 26. 10. 2026 (`gate.enabled = false` v `src/config.ts`), web je veřejný a indexovatelný. Zámek jde kdykoli znovu zapnout.

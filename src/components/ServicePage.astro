@@ -23,6 +23,9 @@ const others = services.filter((s) => s.slug !== service.slug);
         <p class="eyebrow">{service.eyebrow}</p>
         <h1 id="service-title">{service.title}</h1>
         <p class="lead">{service.lead}</p>
+        <ul class="facts" aria-label="V kostce">
+          {service.facts.map((fact) => <li class="mono">{fact}</li>)}
+        </ul>
         <div class="actions">
           <a href="#kontakt" class="btn btn-primary">Domluvit konzultaci zdarma</a>
           <a href={`${home}#proces`} class="btn btn-ghost">Jak pracujeme</a>
@@ -157,6 +160,24 @@ const others = services.filter((s) => s.slug !== service.slug);
     color: var(--text-muted);
     max-width: 640px;
     text-wrap: pretty;
+  }
+
+  .facts {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .facts li {
+    padding: 6px 12px;
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    background: var(--surface);
+    font-size: 15px;
+    color: var(--text-subtle);
   }
 
   .actions {
@@ -337,6 +358,10 @@ const others = services.filter((s) => s.slug !== service.slug);
     .hero-inner {
       align-items: center;
       text-align: center;
+    }
+
+    .facts {
+      justify-content: center;
     }
 
     .actions {
