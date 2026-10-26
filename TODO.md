@@ -1,8 +1,7 @@
 # TODO – MarkDo web
 
 ## Placeholdery v textu (`[takhle]`)
-- [ ] Případovka: typ firmy, věta o klientovi, problém, řešení, výsledek `[X h / měsíc]` – `src/components/CaseStudy.astro`
-- [ ] Doplnění bia Markéty – `src/components/Team.astro`
+- [ ] Případovka Toasters Picture: výsledek `[X h / měsíc]`, ověřit název firmy a souhlas klienta se zveřejněním – `src/components/CaseStudy.astro`
 - [ ] E-mail – `src/config.ts`
 - [ ] Zásady osobních údajů (`src/pages/osobni-udaje.astro`): doplnit správce (jméno/firma, IČO, adresa), dobu uchování `[12 měsíců]`, službu pro formulář a poskytovatele e-mailu. Ideálně nechat zkontrolovat.
 - [ ] OG obrázek – zatím `public/og-placeholder.png` (1200×630, jen logo), nahradit finálním
